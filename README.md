@@ -21,5 +21,20 @@ don't have to consider any side effects of time travel or how Scrooge's massive 
 would affect the price history.
 
 
+## Task list
 
+### Kickoff
+- Deciding whether to develop React Native or responsive React app
+	- React Native
+- Thinking the work division and roles inside the team
+	- Scrum master: Joona L
+	- Designer: Joona L 
+	- Project Owner: Wimme
+	- Developers: Haatis, Joona K, Joni
+- Identifying main areas of the project -> Get the right scope
+	- Cryptocurrencies
+- Identify tasks of the project -> Initial backlog to HacknPlan
+- Starting the first sprint
+- Creating GitHub repository
+- Logging working hours to HacknPlan from the very beginning and you can put there everything like, for example, studying those things you need for developing the app
 
