@@ -3,6 +3,9 @@ import { StyleSheet, Text, View, FlatList, Button, Platform, Pressable} from 're
 import React, { useEffect, useState,  SafeAreaView, TextInput } from "react";
 import DatePicker from './components/DatePicker';
 import Chart from './components/Chart';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import styles from './style/style';
 
 
 
@@ -15,19 +18,12 @@ const childToParent =  (asd) => {
 
   return (
     <View>
+      <Header/>
   <DatePicker childToParent={childToParent}/>
   <Chart datafromparent={data}/>
   <Text>This is a test</Text>
+  <Footer/>
 </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
