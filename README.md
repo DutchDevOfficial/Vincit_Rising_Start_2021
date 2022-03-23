@@ -30,7 +30,7 @@ would affect the price history.
 	- Scrum master: Joona L
 	- Designer: Joona L 
 	- Project Owner: Wimme
-	- Developers: Haatis, Joona K, Joni
+	- Developers: Haatis, Joona K, Joni, Valtteri
 - Identifying main areas of the project -> Get the right scope
 	- Cryptocurrencies
 - Identify tasks of the project -> Initial backlog to HacknPlan
