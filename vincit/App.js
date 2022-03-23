@@ -21,7 +21,7 @@ const childToParent =  (asd) => {
       <Header/>
   <DatePicker childToParent={childToParent}/>
   <Chart datafromparent={data}/>
-  <Text>This is a test1</Text>
+  <Text>This is a test2</Text>
   <Footer/>
 </View>
   );
