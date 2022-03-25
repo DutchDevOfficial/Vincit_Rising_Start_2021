@@ -95,30 +95,27 @@ const [output, setOutput] = useState("")
         }
       )
 }
-  function GetHighestVolume(_totalVolume){
-    let max = 0;
-    let currentMax = 0;
-    let maxIndex = 0;
-    for (let i = 0; i < _totalVolume.length -1; i++) {
-      if (_totalVolume[i][1] < _totalVolume[i + 1][1]) {
-        currentMax=_totalVolume[i][1];
-       if(currentMax>max){
-        max=currentMax;
-        maxIndex = i 
-       }
-
-      } else {
-        currentMax=_totalVolume[i][1];
-        if(currentMax>max){
-          max=currentMax;
-          maxIndex=i 
-        }
-      }
-      let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0,-12)
-      setText2("The highest trading volume was "+_totalVolume[maxIndex][1]+ " on " + HighestVolumeDay)
+function GetHighestVolume(_totalVolume){
+  let current = 0;
+  let max = 1;
+  let index = 0;
+  for (let i = 0; i < _totalVolume.length -1; i++) {
+    if (_totalVolume[i][1] < _totalVolume[i + 1][1]) {
+      current=(_totalVolume[i][1]);
+     if(current>max){
+      max=current;
+      index= i;
+      current=0;
     }
-    
+    let HighestVolumeDay = new Date(_totalVolume[index][0]).toUTCString().slice(0,-12)
+    setText2("The highest trading volume was "+_totalVolume[index][1]+ " on " + HighestVolumeDay )  
   }
+  
+}
+}
+    
+   
+    
 
   function GetDownwardTrend(_prices) {
     //console.log(_prices)
