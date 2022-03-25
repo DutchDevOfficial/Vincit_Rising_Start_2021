@@ -20,6 +20,12 @@ output should indicate that one should not buy (nor sell) bitcoin on any of the 
 don't have to consider any side effects of time travel or how Scrooge's massive purchases
 would affect the price history.
 
+## Color codes for now	(can add more or change)
+- dark orange			#f44c34
+- light orange			#f36f57
+- dark grey				#35393C
+- greyish/light orange	#e7d2ce
+
 
 ## Task list
 
