@@ -21,6 +21,8 @@ const [start, setStart] = useState([]);
 const [end, setEnd] = useState([]);
 
 
+
+
   const onChange = (event, selectedDate) => {
     
     setShow(false);
@@ -51,9 +53,17 @@ const [end, setEnd] = useState([]);
     let asd= "gotem"
     setText(asd)
     loadData(startDateUnix, endDateUnix);
+    
+    
   }
 
-  
+  const checkBearish = (data) => {
+    for (let i = 0; i < data.prices.length; i++) {
+      data.prices[i].push(new Date(data.prices[i][0]).toLocaleDateString("en-US"))
+    }
+  setText(data.prices[0][2])       
+    
+  }
 
 
   const loadData = async (startDateUnix, endDateUnix) => {
@@ -75,6 +85,7 @@ const [end, setEnd] = useState([]);
     setStart(start);
     setEnd(lastElement);
     childToParent(data);
+    checkBearish(data);
   };
 
 
@@ -137,12 +148,13 @@ const [end, setEnd] = useState([]);
   <Text>{unix2}</Text>
   <Text>{start[1]}</Text>
   <Text>{end[1]}</Text>
+
 </View>
 <Pressable>
 <Button title="confirm dates" onPress={confirm}></Button>
 
 </Pressable>
 </View>
-  );
+  )
 }
 
