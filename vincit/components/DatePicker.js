@@ -21,8 +21,6 @@ export default function DatePicker({ childToParent }) {
   const [end, setEnd] = useState([]);
 
 
-
-
   const onChange = (event, selectedDate) => {
 
     setShow(false);
@@ -48,28 +46,9 @@ export default function DatePicker({ childToParent }) {
   }
 
   const confirm = () => {
-<<<<<<< HEAD
-    let startDateUnix =(Math.floor(new Date(date).getTime() / 1000));
-    let endDateUnix =(Math.floor(new Date(date2).getTime() / 1000));
-    let asd= "gotem"
-    setText(asd)
-    loadData(startDateUnix, endDateUnix);
-    
-    
-  }
-
-  const checkBearish = (data) => {
-    for (let i = 0; i < data.prices.length; i++) {
-      data.prices[i].push(new Date(data.prices[i][0]).toLocaleDateString("en-US"))
-    }
-  setText(data.prices[0][2])       
-    
-  }
-=======
     FetchData();
   }
 
->>>>>>> 2df2154cd06738b8d330897a697ed6e4b10e751a
 
 
 /*
@@ -92,7 +71,6 @@ export default function DatePicker({ childToParent }) {
     setStart(start);
     setEnd(lastElement);
     childToParent(data);
-    checkBearish(data);
   };
 
   
@@ -159,8 +137,8 @@ const [output, setOutput] = useState("")
     }
 
     console.log("longestTrendIndex: ", longestTrendIndex)
-    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().split(' 00:00:00 GMT')[0]
-    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).split(' 00:00:00 GMT')[0]
+    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0,-15)
+    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0,-15)
     console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
     setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay)
   }
@@ -232,47 +210,6 @@ const [output, setOutput] = useState("")
 
       </Pressable>
     </View>
-<<<<<<< HEAD
-    <View>
-    <Text>end date</Text>
-  <Pressable
-  onPress={toggle2}>
-    <Text>
-      {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}
-    </Text>
-  </Pressable>
-  {show2 && Platform.OS ==='ios' && (
-    <DateTimePicker
-    style={{width: 320}}
-    mode={'date'}
-    display="inline"
-    value={date2}
-    onChange={onChange2}
-    />
-  )}
-  {show2 && Platform.OS ==='android' && (
-    <DateTimePicker
-    mode={'date'}
-    display="default"
-    value={date2}
-    onChange={onChange2}
-  />
-  )}
-  <Text>{text}</Text>
-  <Text>{unix}</Text>
-  <Text>{unix2}</Text>
-  <Text>{start[1]}</Text>
-  <Text>{end[1]}</Text>
-
-</View>
-<Pressable>
-<Button title="confirm dates" onPress={confirm}></Button>
-
-</Pressable>
-</View>
-  )
-=======
   );
->>>>>>> 2df2154cd06738b8d330897a697ed6e4b10e751a
 }
 

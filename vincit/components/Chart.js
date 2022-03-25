@@ -12,27 +12,17 @@ import React, { useEffect, useState,  SafeAreaView, TextInput } from "react";
   export default function Chart({datafromparent}){
     const slicedArray = datafromparent.slice(0, 5);
     const [text, setText] = useState(Math.random() * 100);
-
-    const loadData = async (startDateUnix, endDateUnix) => {
-      if (endDateUnix<startDateUnix){
-        setText('End date must be later than start date');
-        return;
-  
-      } else if (endDateUnix===startDateUnix) {
-        setText('End date must be later than start date');
-        return;
-      }
-      let apiURL= 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from=1577836800&to=1609376400';
-      const res = await fetch(
-        apiURL
-      );
-      const data = await res.json();
-      setText(data)  
-      }
-
+    
+ const chart = () => {
+  setText(slicedArray[0][0]);
+}
     return(
   <View>
   <Text>Bitcoin price Chart</Text>
+  <Pressable>
+<Button title="show chart" onPress={chart}></Button>
+
+</Pressable>
   <LineChart
     data={{
       labels: ["January", "February", "March", "April", "May", "June"],
