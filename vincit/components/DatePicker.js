@@ -13,6 +13,7 @@ export default function DatePicker({ childToParent }) {
   const [date2, setDate2] = useState(new Date());
   const [show2, setShow2] = useState(false);
   const [text, setText] = useState('');
+  const [text2, setText2] = useState('');
 
   const [unix, setUnix] = useState('');
   const [unix2, setUnix2] = useState('');
@@ -49,33 +50,7 @@ export default function DatePicker({ childToParent }) {
     FetchData();
   }
 
-
-
-/*
-  const loadData = async (startDateUnix, endDateUnix) => {
-    if (endDateUnix < startDateUnix) {
-      setText('End date must be later than start date');
-      return;
-
-    } else if (endDateUnix === startDateUnix) {
-      setText('End date must be later than start date');
-      return;
-    }
-    let apiURL = 'https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from=' + startDateUnix + '&to=' + endDateUnix;
-    const res = await fetch(
-      apiURL
-    );
-    const data = await res.json();
-    const start = await data.prices[0];
-    const lastElement = await data.prices[data.prices.length - 1];
-    setStart(start);
-    setEnd(lastElement);
-    childToParent(data);
-  };
-
   
-  
-*/
 const [output, setOutput] = useState("")
   const url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from="
 
@@ -98,25 +73,52 @@ const [output, setOutput] = useState("")
       .then(
         (result) => {
           let _prices = new Array
+          let _totalVolume = new Array
           for (let i = 0; i < result.prices.length; i++) {
             //console.log(i, result.prices[i])
             //console.log(new Date(result.prices[i][0]).toUTCString())
             if (dayRange < 90) {
               if (i % 24 == 0 || unixStartDate < 1527120000) { //limit to 1 result, closest to 00:00 UTC || also test if earlier than 2018.5.23, otherwise will result in errors
                 _prices.push(result.prices[i])
+                _totalVolume.push(result.total_volumes[i])
               }
             } else {
               _prices.push(result.prices[i])
+              _totalVolume.push(result.total_volumes[i])
             }
           }
           GetDownwardTrend(_prices)
+          GetHighestVolume(_totalVolume)
         },
         (error) => {
           alert("Error!")
         }
       )
 }
-  
+  function GetHighestVolume(_totalVolume){
+    let max = 0;
+    let currentMax = 0;
+    let maxIndex = 0;
+    for (let i = 0; i < _totalVolume.length -1; i++) {
+      if (_totalVolume[i][1] < _totalVolume[i + 1][1]) {
+        currentMax=_totalVolume[i][1];
+       if(currentMax>max){
+        max=currentMax;
+        maxIndex = i 
+       }
+
+      } else {
+        currentMax=_totalVolume[i][1];
+        if(currentMax>max){
+          max=currentMax;
+          maxIndex=i 
+        }
+      }
+      let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0,-12)
+      setText2("The highest trading volume was "+_totalVolume[maxIndex][1]+ " on " + HighestVolumeDay)
+    }
+    
+  }
 
   function GetDownwardTrend(_prices) {
     //console.log(_prices)
@@ -137,8 +139,8 @@ const [output, setOutput] = useState("")
     }
 
     console.log("longestTrendIndex: ", longestTrendIndex)
-    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0,-15)
-    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0,-15)
+    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0,-12)
+    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0,-12)
     console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
     setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay)
   }
@@ -200,10 +202,7 @@ const [output, setOutput] = useState("")
           />
         )}
         <Text>{text}</Text>
-        <Text>{unix}</Text>
-        <Text>{unix2}</Text>
-        <Text>{start[1]}</Text>
-        <Text>{end[1]}</Text>
+        <Text>{text2}</Text>
       </View>
       <Pressable>
         <Button title="confirm dates" onPress={confirm}></Button>
