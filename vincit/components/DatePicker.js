@@ -137,8 +137,8 @@ const [output, setOutput] = useState("")
     }
 
     console.log("longestTrendIndex: ", longestTrendIndex)
-    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().split(' 00:00:00 GMT')[0]
-    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).split(' 00:00:00 GMT')[0]
+    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0,-15)
+    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0,-15)
     console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
     setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay)
   }
