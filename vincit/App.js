@@ -17,14 +17,6 @@ export default function App() {
 
   return (
     <View>
-<<<<<<< HEAD
-      <Header/>
-  <DatePicker childToParent={childToParent}/>
-  <Chart datafromparent={data}/>
-  <Text>This is a test</Text>
-  <Footer/>
-</View>
-=======
       <Header />
       <DatePicker childToParent={childToParent} />
       <Chart datafromparent={data} />
@@ -32,7 +24,6 @@ export default function App() {
       <Text>This is a test1</Text>
       <Footer />
     </View>
->>>>>>> fe05a7c124596701c8ed7e31fa2957b694d09ce6
   );
 }
 
