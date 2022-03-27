@@ -14,6 +14,7 @@ export default function DatePicker({ childToParent }) {
   const [show2, setShow2] = useState(false);
   const [text, setText] = useState('');
   const [text2, setText2] = useState('');
+  const [text3, setText3] = useState('');
 
   const [unix, setUnix] = useState('');
   const [unix2, setUnix2] = useState('');
@@ -89,32 +90,49 @@ const [output, setOutput] = useState("")
           }
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
+          maxProfit(_prices)
+          
         },
         (error) => {
           alert("Error!")
         }
       )
 }
-function GetHighestVolume(_totalVolume){
-  let current = 0;
-  let max = 1;
-  let index = 0;
-  for (let i = 0; i < _totalVolume.length -1; i++) {
-    if (_totalVolume[i][1] < _totalVolume[i + 1][1]) {
-      current=(_totalVolume[i][1]);
-     if(current>max){
-      max=current;
-      index= i;
-      current=0;
-    }
-    let HighestVolumeDay = new Date(_totalVolume[index][0]).toUTCString().slice(0,-12)
-    setText2("The highest trading volume was "+_totalVolume[index][1]+ " on " + HighestVolumeDay )  
+function GetHighestVolume(_totalVolume, _prices){
+  let max = 0;
+  let maxIndex = 0;
+
+for (let i = 0; i < _totalVolume.length ; i++) {
+  if (_totalVolume[i][1] > max) {
+      max = _totalVolume[i][1];
+      maxIndex = i;
   }
-  
 }
+  let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0,-12)
+    setText2("The highest trading volume was "+_totalVolume[maxIndex][1]+ " on " + HighestVolumeDay)
 }
+
+function maxProfit(_prices) {
+  let maxProfit = 0;
+  let min  = _prices[0][1];
+  let minIndex = 0;
+  let maxIndex = 0;
+  for(let i = 1; i < _prices.length; i++) {
+    if (min>_prices[i][1]){
+      min = Math.min(_prices[i][1], min);
+      minIndex = i;
+      _prices[i] =_prices[i].slice(0, minIndex)
+    }
+    if (maxProfit < _prices[i][1]-min) {
+      maxProfit = Math.max(maxProfit, _prices[i][1] - min);
+      maxIndex = i;
+  }
+     
     
-   
+  }
+  setText3("Max profit " + maxProfit + ' buy at ' + new Date(_prices[minIndex][0]).toUTCString().slice(0,-12)+ 'sell at ' + new Date(_prices[maxIndex][0]).toUTCString().slice(0,-12))
+};
+
     
 
   function GetDownwardTrend(_prices) {
@@ -200,6 +218,7 @@ function GetHighestVolume(_totalVolume){
         )}
         <Text>{text}</Text>
         <Text>{text2}</Text>
+        <Text>{text3}</Text>
       </View>
       <Pressable>
         <Button title="confirm dates" onPress={confirm}></Button>
