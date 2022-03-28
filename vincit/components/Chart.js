@@ -3,13 +3,41 @@ import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState } from "react";
 
 export default function Chart({ parentData }) {
-  /*   const slicedArray = dataFromParent.slice(0, 5);
-    const [text, setText] = useState(Math.random() * 100);
-    const chart = () => {
-      setText(slicedArray[0][0]);
-    } */
-  const [label, setLabels] = useState([10000]);
+/* 
+  const [data, setData] = useState('');
+  const [data2, setData2] = useState('');
+  const [x, setX] = useState(["January", "February", "March", "April", "May", "June"]);
+  const [y, setY] = useState([
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+  ]);
 
+
+  const chart = () => {
+    setData(parentData);
+    loadChart()
+  }
+
+  const loadChart = () => {
+    if (data.length > 0) {
+      setX([]);
+      setY([]);
+      let asd = new Array;
+      let asd2 = new Array;
+      for (let i = 0; i < data.length; i++) {
+        asd.push(new Date(data[i][0]).toUTCString().slice(0, -22))
+        asd2.push((Number(data[i][1]).toFixed(2).slice(0, -5)))
+      }
+
+      setX(asd)
+      setY(asd2)
+    }
+  }
+ */
   let dates = []
   let prices = []
 
@@ -38,7 +66,7 @@ export default function Chart({ parentData }) {
         width={Dimensions.get("window").width} // from react-native
         height={220}
         yAxisLabel="$"
-        yAxisSuffix=""
+        yAxisSuffix="k"
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           backgroundColor: "#e26a00",
@@ -61,20 +89,40 @@ export default function Chart({ parentData }) {
           borderRadius: 16
         }}
       />
+      <Text>{parentData.length}</Text>
     </View>
   )
 }
-const chartConfig = {
-  backgroundGradientFrom: "#1E2923",
-  backgroundGradientFromOpacity: 0,
-  backgroundGradientTo: "#08130D",
-  backgroundGradientToOpacity: 0.5,
-  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-  strokeWidth: 2, // optional, default 3
-  barPercentage: 0.5,
-  useShadowColorFromDataset: false // optional
-};
+// const chartConfig = {
+//   backgroundGradientFrom: "#1E2923",
+//   backgroundGradientFromOpacity: 0,
+//   backgroundGradientTo: "#08130D",
+//   backgroundGradientToOpacity: 0.5,
+//   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+//   strokeWidth: 2, // optional, default 3
+//   barPercentage: 0.5,
+//   useShadowColorFromDataset: false // optional
+// };
 
+
+   
+
+  
+
+//   <Pressable>
+//    <Button title="show chart" onPress={chart}></Button>
+//   </Pressable>
+//   <LineChart
+//     data={{
+//       labels: x,
+//       datasets: [
+//         {
+//           data: y,
+//         }
+//       ]
+//     }}
+
+    
   // <LineChart
   //   data={{
   //     labels: [slicedArray[0][0], slicedArray[1][0], slicedArray[1][0], slicedArray[1][0], slicedArray[1][0], slicedArray[1][0]],

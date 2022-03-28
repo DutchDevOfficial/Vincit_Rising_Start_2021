@@ -10,14 +10,13 @@ import MaximizeProfit from './components/MaximizeProfit';
 export default function App() {
 
   const [parentData, setParentData] = useState([]);
-
-  /*   const childToParent = (asd) => {
-      setData(asd.prices);
-    } */
+  const [data, setData] = useState([]);
 
   const childToParent = (childData) => {
     setParentData(childData);
+    setData(childData)
   }
+
   const [showChart, setShowChart] = useState(false);
 
   return (
@@ -27,9 +26,9 @@ export default function App() {
       {showChart ? (
         <Text>Bitcoin price Chart</Text>,
         <Chart parentData={parentData} />
-        ) : null}
+      ) : null}
       <Pressable>
-        <Button title="show/hide price chart" onPress={() => setShowChart(!showChart)}/>
+        <Button title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
       </Pressable>
       <MaximizeProfit parentData={parentData} />
       <Text>This is a test1</Text>

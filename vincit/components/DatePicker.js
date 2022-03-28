@@ -1,8 +1,6 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, Button, Platform, Pressable, Alert } from 'react-native';
-import React, { useEffect, useState, SafeAreaView, TextInput } from "react";
+import { Text, View, Button, Platform, Pressable } from 'react-native';
+import React, { useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
-
 
 
 export default function DatePicker({ childToParent }) {
@@ -51,19 +49,19 @@ export default function DatePicker({ childToParent }) {
     FetchData();
   }
 
-  
-const [output, setOutput] = useState("")
+
+  const [output, setOutput] = useState("")
   const url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from="
 
 
   function FetchData() {
 
-    
+
 
     let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
-    const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime())/1000
+    const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime()) / 1000
     let _endDate = new Date(date2)
-    const unixEndDate = (new Date(Date.UTC(_endDate.getFullYear(), _endDate.getMonth(), _endDate.getDate())).getTime())/1000 + 3600
+    const unixEndDate = (new Date(Date.UTC(_endDate.getFullYear(), _endDate.getMonth(), _endDate.getDate())).getTime()) / 1000 + 3600
 
     const dayRange = (unixEndDate - unixStartDate - 3600) / 60 / 60 / 24
 
@@ -74,6 +72,7 @@ const [output, setOutput] = useState("")
       .then(
         (result) => {
           let _prices = new Array
+          let _prices2 = new Array
           let _totalVolume = new Array
           for (let i = 0; i < result.prices.length; i++) {
             //console.log(i, result.prices[i])
@@ -81,60 +80,63 @@ const [output, setOutput] = useState("")
             if (dayRange < 90) {
               if (i % 24 == 0 || unixStartDate < 1527120000) { //limit to 1 result, closest to 00:00 UTC || also test if earlier than 2018.5.23, otherwise will result in errors
                 _prices.push(result.prices[i])
+                _prices2.push(result.prices[i])
                 _totalVolume.push(result.total_volumes[i])
               }
             } else {
               _prices.push(result.prices[i])
+              _prices2.push(result.prices[i])
               _totalVolume.push(result.total_volumes[i])
             }
           }
-          childToParent(_prices)
+          childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
-          
+
+
         },
         (error) => {
           alert("Error!")
         }
       )
-}
-function GetHighestVolume(_totalVolume, _prices){
-  let max = 0;
-  let maxIndex = 0;
-
-for (let i = 0; i < _totalVolume.length ; i++) {
-  if (_totalVolume[i][1] > max) {
-      max = _totalVolume[i][1];
-      maxIndex = i;
   }
-}
-  let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0,-12)
-    setText2("The highest trading volume was "+_totalVolume[maxIndex][1]+ " on " + HighestVolumeDay)
-}
+  function GetHighestVolume(_totalVolume, _prices) {
+    let max = 0;
+    let maxIndex = 0;
 
-function maxProfit(_prices) {
-  let maxProfit = 0;
-  let min  = _prices[0][1];
-  let minIndex = 0;
-  let maxIndex = 0;
-  for(let i = 1; i < _prices.length; i++) {
-    if (min>_prices[i][1]){
-      min = Math.min(_prices[i][1], min);
-      minIndex = i;
-      _prices[i] =_prices[i].slice(0, minIndex)
+    for (let i = 0; i < _totalVolume.length; i++) {
+      if (_totalVolume[i][1] > max) {
+        max = _totalVolume[i][1];
+        maxIndex = i;
+      }
     }
-    if (maxProfit < _prices[i][1]-min) {
-      maxProfit = Math.max(maxProfit, _prices[i][1] - min);
-      maxIndex = i;
+    let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0, -12)
+    setText2("The highest trading volume was " + _totalVolume[maxIndex][1] + " on " + HighestVolumeDay)
   }
-     
-    
-  }
-  setText3("Max profit " + maxProfit + ' buy at ' + new Date(_prices[minIndex][0]).toUTCString().slice(0,-12)+ 'sell at ' + new Date(_prices[maxIndex][0]).toUTCString().slice(0,-12))
-};
 
-    
+  function maxProfit(_prices) {
+    let maxProfit = 0;
+    let min = _prices[0][1];
+    let minIndex = 0;
+    let maxIndex = 0;
+    for (let i = 1; i < _prices.length; i++) {
+      if (min > _prices[i][1]) {
+        min = Math.min(_prices[i][1], min);
+        minIndex = i;
+        _prices[i] = _prices[i].slice(0, minIndex)
+      }
+      if (maxProfit < _prices[i][1] - min) {
+        maxProfit = Math.max(maxProfit, _prices[i][1] - min);
+        maxIndex = i;
+      }
+
+
+    }
+    setText3("Max profit " + maxProfit + ' buy at ' + new Date(_prices[minIndex][0]).toUTCString().slice(0, -12) + 'sell at ' + new Date(_prices[maxIndex][0]).toUTCString().slice(0, -12))
+  };
+
+
 
   function GetDownwardTrend(_prices) {
     //console.log(_prices)
@@ -155,12 +157,12 @@ function maxProfit(_prices) {
     }
 
     console.log("longestTrendIndex: ", longestTrendIndex)
-    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0,-12)
-    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0,-12)
+    let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0, -12)
+    let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0, -12)
     console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
-    setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay)
+    setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay + " ")
   }
-  
+
 
 
 
@@ -227,7 +229,6 @@ function maxProfit(_prices) {
       </View>
       <Pressable>
         <Button title="confirm dates" onPress={confirm}></Button>
-
       </Pressable>
     </View>
   );
