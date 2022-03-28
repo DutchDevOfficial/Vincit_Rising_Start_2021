@@ -12,7 +12,8 @@ export default function App() {
   const [data, setData] = useState([]);
   
   const childToParent = (asd) => {
-    setData(asd.prices);
+    setData(asd);
+    
   }
 
   return (

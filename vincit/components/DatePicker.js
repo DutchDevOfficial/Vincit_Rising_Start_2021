@@ -74,6 +74,7 @@ const [output, setOutput] = useState("")
       .then(
         (result) => {
           let _prices = new Array
+          let _prices2 = new Array
           let _totalVolume = new Array
           for (let i = 0; i < result.prices.length; i++) {
             //console.log(i, result.prices[i])
@@ -81,16 +82,20 @@ const [output, setOutput] = useState("")
             if (dayRange < 90) {
               if (i % 24 == 0 || unixStartDate < 1527120000) { //limit to 1 result, closest to 00:00 UTC || also test if earlier than 2018.5.23, otherwise will result in errors
                 _prices.push(result.prices[i])
+                _prices2.push(result.prices[i])
                 _totalVolume.push(result.total_volumes[i])
               }
             } else {
               _prices.push(result.prices[i])
+              _prices2.push(result.prices[i])
               _totalVolume.push(result.total_volumes[i])
             }
           }
+          childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
+          
           
         },
         (error) => {
@@ -157,7 +162,7 @@ function maxProfit(_prices) {
     let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0,-12)
     let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0,-12)
     console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
-    setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay)
+    setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay + " ")
   }
   
 

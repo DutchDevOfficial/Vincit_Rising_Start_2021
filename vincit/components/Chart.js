@@ -10,11 +10,38 @@ import {
 import { StyleSheet, Text, View, FlatList, Button, Platform, Pressable, Alert, Dimensions} from 'react-native';
 import React, { useEffect, useState,  SafeAreaView, TextInput } from "react";
   export default function Chart({datafromparent}){
-    const slicedArray = datafromparent.slice(0, 5);
-    const [text, setText] = useState(Math.random() * 100);
-    
+    const [data, setData] = useState('');
+    const [data2, setData2] = useState('');
+    const [x, setX] = useState(["January", "February", "March", "April", "May", "June"]);
+    const [y, setY] = useState([
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+      Math.random() * 100,
+    ]);
+
  const chart = () => {
-  setText(slicedArray[0][0]);
+  setData(datafromparent);
+  loadChart()
+  }
+  
+  const loadChart = () => {
+    if (data.length>0){
+      setX([]);
+      setY([]);
+      let asd = new Array;
+      let asd2 = new Array;
+      for (let i=0; i<data.length; i++){
+        asd.push(new Date(data[i][0]).toUTCString().slice(0,-22))
+        asd2.push((Number(data[i][1]).toFixed(2).slice(0,-5)))
+      }
+      
+      setX(asd)
+      setY(asd2)
+  }
+  
 }
     return(
   <View>
@@ -25,17 +52,10 @@ import React, { useEffect, useState,  SafeAreaView, TextInput } from "react";
 </Pressable>
   <LineChart
     data={{
-      labels: ["January", "February", "March", "April", "May", "June"],
+      labels: x,
       datasets: [
         {
-          data: [
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-            Math.random() * 100,
-          ]
+          data: y,
         }
       ]
     }}
@@ -66,6 +86,7 @@ import React, { useEffect, useState,  SafeAreaView, TextInput } from "react";
       borderRadius: 16
     }}
   />
+  <Text>{datafromparent.length}</Text>
 </View>
       )
 }
