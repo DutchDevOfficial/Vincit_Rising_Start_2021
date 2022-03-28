@@ -88,6 +88,7 @@ const [output, setOutput] = useState("")
               _totalVolume.push(result.total_volumes[i])
             }
           }
+          childToParent(_prices)
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
@@ -180,6 +181,7 @@ function maxProfit(_prices) {
             display="inline"
             value={date}
             onChange={onChange}
+            maximumDate={new Date()}
           />
         )}
         {show && Platform.OS === 'android' && (
@@ -188,11 +190,12 @@ function maxProfit(_prices) {
             display="default"
             value={date}
             onChange={onChange}
+            maximumDate={new Date()}
           />
         )}
       </View>
       <View>
-        <Text>end date</Text>
+        <Text>End date</Text>
         <Pressable
           onPress={toggle2}>
           <Text>
@@ -206,6 +209,7 @@ function maxProfit(_prices) {
             display="inline"
             value={date2}
             onChange={onChange2}
+            maximumDate={new Date()}
           />
         )}
         {show2 && Platform.OS === 'android' && (
@@ -214,6 +218,7 @@ function maxProfit(_prices) {
             display="default"
             value={date2}
             onChange={onChange2}
+            maximumDate={new Date()}
           />
         )}
         <Text>{text}</Text>
