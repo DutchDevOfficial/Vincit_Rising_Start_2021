@@ -13,7 +13,7 @@ export default function App() {
   
   const childToParent = (asd) => {
     setData(asd);
-    console.log(asd)
+    
   }
 
   return (
