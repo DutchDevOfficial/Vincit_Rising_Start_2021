@@ -3,55 +3,31 @@ import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState } from "react";
 
 export default function Chart({ parentData }) {
-/* 
-  const [data, setData] = useState('');
-  const [data2, setData2] = useState('');
-  const [x, setX] = useState(["January", "February", "March", "April", "May", "June"]);
-  const [y, setY] = useState([
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-    Math.random() * 100,
-  ]);
 
-
-  const chart = () => {
-    setData(parentData);
-    loadChart()
-  }
-
-  const loadChart = () => {
-    if (data.length > 0) {
-      setX([]);
-      setY([]);
-      let asd = new Array;
-      let asd2 = new Array;
-      for (let i = 0; i < data.length; i++) {
-        asd.push(new Date(data[i][0]).toUTCString().slice(0, -22))
-        asd2.push((Number(data[i][1]).toFixed(2).slice(0, -5)))
-      }
-
-      setX(asd)
-      setY(asd2)
-    }
-  }
- */
   let dates = []
   let prices = []
+
+  if(parentData.length>8){
+    let divider = 2+Math.floor((parentData.length-8)/6)
+      let x = parentData.filter((element, index) => {   
+        return index % divider === 0;
+      })
+      parentData = x
+  }
+    
+      
 
   if (parentData === "undefined") {
     return null;
   } else if (true === false) {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(17, -7))
-      prices.push(parentData[i][1])
+      prices.push(parentData[i][1].toFixed(2).slice(0, -6))
     }
   } else {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(4, -18))
-      prices.push(parentData[i][1])
+      prices.push(parentData[i][1].toFixed(2).slice(0, -6))
     }
   }
 
@@ -89,54 +65,6 @@ export default function Chart({ parentData }) {
           borderRadius: 16
         }}
       />
-      <Text>{parentData.length}</Text>
     </View>
   )
 }
-// const chartConfig = {
-//   backgroundGradientFrom: "#1E2923",
-//   backgroundGradientFromOpacity: 0,
-//   backgroundGradientTo: "#08130D",
-//   backgroundGradientToOpacity: 0.5,
-//   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
-//   strokeWidth: 2, // optional, default 3
-//   barPercentage: 0.5,
-//   useShadowColorFromDataset: false // optional
-// };
-
-
-   
-
-  
-
-//   <Pressable>
-//    <Button title="show chart" onPress={chart}></Button>
-//   </Pressable>
-//   <LineChart
-//     data={{
-//       labels: x,
-//       datasets: [
-//         {
-//           data: y,
-//         }
-//       ]
-//     }}
-
-    
-  // <LineChart
-  //   data={{
-  //     labels: [slicedArray[0][0], slicedArray[1][0], slicedArray[1][0], slicedArray[1][0], slicedArray[1][0], slicedArray[1][0]],
-  //     datasets: [
-  //       {
-  //         data: [
-  //           slicedArray[0][1],
-  //           slicedArray[1][1],
-  //           slicedArray[2][1],
-  //           slicedArray[3][1],
-  //           slicedArray[4][1],
-  //           slicedArray[5][1],
-          
-  //         ]
-  //       }
-  //     ]
-  //   }}
