@@ -1,15 +1,43 @@
 import { View, Text } from 'react-native'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default function MaximizeProfit(data) {
-  const [Prices, setPrices] = useState([]);
-  const [MaxDifference, setMaxDifference] = useState([]);
-  const [BuyDate, setBuyDate] = useState([]);
-  const [SellDate, setSellDate] = useState([]);
+export default function MaximizeProfit({ parentData }) {
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    Calculate();
+  }, [parentData]);
+
+  function Calculate() {
+    if (parentData.length === 0 || parentData === "undefined") {
+      return null;
+    } else {
+      let prices = Array.from(parentData);
+      let maxProfit = 0;
+      let min = prices[0][1];
+      let minIndex = 0;
+      let maxIndex = 0;
+      console.log(prices.length);
+
+      for (let i = 1; i < prices.length; i++) {
+        if (min > prices[i][1]) {
+          min = Math.min(prices[i][1], min);
+          minIndex = i;
+          prices[i] = prices[i].slice(0, minIndex)
+        }
+        if (maxProfit < prices[i][1] - min) {
+          maxProfit = Math.max(maxProfit, prices[i][1] - min);
+          maxIndex = i;
+        }
+        setText("For maximum profit of " + maxProfit.toFixed(2) + ' buy at ' + new Date(prices[minIndex][0]).toUTCString().slice(0, -12) + 'and sell at ' + new Date(prices[maxIndex][0]).toUTCString().slice(0, -12) + '.')
+      }
+    }
+  }
 
   return (
     <View>
       <Text>Maximize Profit</Text>
+      <Text>{text}</Text>
     </View>
   )
 }

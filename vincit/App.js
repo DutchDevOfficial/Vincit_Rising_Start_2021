@@ -14,7 +14,6 @@ export default function App() {
 
   const childToParent = (childData) => {
     setParentData(childData);
-    setData(childData)
   }
 
   const [showChart, setShowChart] = useState(false);
@@ -33,7 +32,6 @@ export default function App() {
         <Button title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
       </Pressable>
       <MaximizeProfit parentData={parentData} />
-      <Text>This is a test1</Text>
       <Footer />
     </View>
   );
