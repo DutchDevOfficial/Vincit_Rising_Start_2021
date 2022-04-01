@@ -11,11 +11,19 @@ export default function App() {
 
   const [parentData, setParentData] = useState([]);
   const [data, setData] = useState([]);
-
+  const [isDisabled, SetIsDisabled] = useState(true);
+ 
   const childToParent = (childData) => {
+    if (childData.length>4){
+      SetIsDisabled(false)
+    } else {
+      SetIsDisabled(true)
+      setShowChart(false);
+    }
     setParentData(childData);
+    setData(childData)
+     
   }
-
   const [showChart, setShowChart] = useState(false);
   const API = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from="
 
@@ -29,9 +37,9 @@ export default function App() {
         <Chart parentData={parentData} />
       ) : null}
       <Pressable>
-        <Button title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
+        <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
       </Pressable>
-      <MaximizeProfit parentData={parentData} />
+      <Text>Start and end date must have atleast 3 days between them to open</Text>
       <Footer />
     </View>
   );
