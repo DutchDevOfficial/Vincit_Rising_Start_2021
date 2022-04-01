@@ -6,14 +6,18 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import styles from './style/style';
 import MaximizeProfit from './components/MaximizeProfit';
+import CurrencyPicker from './components/CurrencyPicker';
 
 export default function App() {
-
+  const [currency, setCurrency] = useState("eur");
   const [parentData, setParentData] = useState([]);
   const [data, setData] = useState([]);
 
   const childToParent = (childData) => {
     setParentData(childData);
+  }
+  const getCurrency = (childData) => {
+    setCurrency(childData);
   }
 
   const [showChart, setShowChart] = useState(false);
@@ -24,6 +28,7 @@ export default function App() {
       <Header />
       <DatePicker childToParent={childToParent} />
       <DatePicker API={API} />
+      <CurrencyPicker getCurrency={getCurrency}/>
       {showChart ? (
         <Text>Bitcoin price Chart</Text>,
         <Chart parentData={parentData} />
