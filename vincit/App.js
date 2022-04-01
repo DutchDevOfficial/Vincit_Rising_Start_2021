@@ -11,33 +11,29 @@ import CurrencyPicker from './components/CurrencyPicker';
 export default function App() {
   const [currency, setCurrency] = useState("eur");
   const [parentData, setParentData] = useState([]);
-  const [data, setData] = useState([]);
   const [isDisabled, SetIsDisabled] = useState(true);
- 
+
   const childToParent = (childData) => {
-    if (childData.length>4){
+    if (childData.length > 4) {
       SetIsDisabled(false)
     } else {
       SetIsDisabled(true)
       setShowChart(false);
     }
     setParentData(childData);
-    setData(childData)
-     
   }
   const getCurrency = (childData) => {
     setCurrency(childData);
   }
 
   const [showChart, setShowChart] = useState(false);
-  const API = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from="
+  const API = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=" + currency + "&from="
 
   return (
     <View>
-
       <Header />
+      <CurrencyPicker getCurrency={getCurrency} />
       <DatePicker childToParent={childToParent} API={API} />
-      <CurrencyPicker getCurrency={getCurrency}/>
       {showChart ? (
         <Text>Bitcoin price Chart</Text>,
         <Chart parentData={parentData} />
@@ -46,6 +42,7 @@ export default function App() {
         <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
       </Pressable>
       <Text>Start and end date must have atleast 3 days between them to open</Text>
+      <MaximizeProfit parentData={parentData} currency={currency} />
       <Footer />
     </View>
   );
