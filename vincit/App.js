@@ -21,9 +21,9 @@ export default function App() {
 
   return (
     <View>
+
       <Header />
-      <DatePicker childToParent={childToParent} />
-      <DatePicker API={API} />
+      <DatePicker childToParent={childToParent} API={API} />
       {showChart ? (
         <Text>Bitcoin price Chart</Text>,
         <Chart parentData={parentData} />

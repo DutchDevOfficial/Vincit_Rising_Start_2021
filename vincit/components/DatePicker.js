@@ -5,6 +5,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function DatePicker({ childToParent, API }) {
 
+  
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
@@ -54,7 +55,6 @@ export default function DatePicker({ childToParent, API }) {
 
 
   function FetchData() {
-
     let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
     const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime()) / 1000
     let _endDate = new Date(date2)    
