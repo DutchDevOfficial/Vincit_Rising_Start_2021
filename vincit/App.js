@@ -1,4 +1,4 @@
-import { Text, View, Button, Pressable } from 'react-native';
+import { Text, View, Button, Pressable, ScrollView } from 'react-native';
 import React, { useState } from "react";
 import DatePicker from './components/DatePicker';
 import Chart from './components/Chart';
@@ -31,20 +31,23 @@ export default function App() {
 
   return (
     <View>
-      <Header />
-      <CurrencyPicker getCurrency={getCurrency} />
-      <DatePicker childToParent={childToParent} API={API} />
-      {showChart ? (
-        <Text>Bitcoin price Chart</Text>,
-        <Chart parentData={parentData} />
-      ) : null}
-      <Pressable>
-        <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
-      </Pressable>
-      <Text>Start and end date must have atleast 3 days between them to open</Text>
-      <MaximizeProfit parentData={parentData} currency={currency} />
-      <Footer />
+      <ScrollView>
+        <Header />
+        <CurrencyPicker getCurrency={getCurrency} />
+        <DatePicker childToParent={childToParent} API={API} />
+        {showChart ? (
+          <Text>Bitcoin price Chart</Text>,
+          <Chart parentData={parentData} />
+        ) : null}
+        <Pressable>
+          <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
+        </Pressable>
+        <Text>Start and end date must have atleast 3 days between them to open</Text>
+        <MaximizeProfit parentData={parentData} currency={currency} />
+        <Footer />
+      </ScrollView>
     </View>
+
   );
 }
 
