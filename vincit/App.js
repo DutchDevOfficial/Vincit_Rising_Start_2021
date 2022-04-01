@@ -18,11 +18,13 @@ export default function App() {
   }
 
   const [showChart, setShowChart] = useState(false);
+  const API = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from="
 
   return (
     <View>
       <Header />
       <DatePicker childToParent={childToParent} />
+      <DatePicker API={API} />
       {showChart ? (
         <Text>Bitcoin price Chart</Text>,
         <Chart parentData={parentData} />

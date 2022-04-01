@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 
-export default function DatePicker({ childToParent }) {
+export default function DatePicker({ childToParent, API }) {
 
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
@@ -51,23 +51,18 @@ export default function DatePicker({ childToParent }) {
 
 
   const [output, setOutput] = useState("")
-  const url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=eur&from="
 
 
   function FetchData() {
 
-
-
     let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
     const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime()) / 1000
-    let _endDate = new Date(date2)
+    let _endDate = new Date(date2)    
     const unixEndDate = (new Date(Date.UTC(_endDate.getFullYear(), _endDate.getMonth(), _endDate.getDate())).getTime()) / 1000 + 3600
 
     const dayRange = (unixEndDate - unixStartDate - 3600) / 60 / 60 / 24
 
-    console.log(new Date(unixStartDate).toUTCString())
-
-    fetch(url + unixStartDate + "&to=" + unixEndDate)
+    fetch(API + unixStartDate + "&to=" + unixEndDate)
       .then(res => res.json())
       .then(
         (result) => {
@@ -93,8 +88,6 @@ export default function DatePicker({ childToParent }) {
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
-
-
         },
         (error) => {
           alert("Error!")
@@ -156,10 +149,10 @@ export default function DatePicker({ childToParent }) {
       }
     }
 
-    console.log("longestTrendIndex: ", longestTrendIndex)
+    //console.log("longestTrendIndex: ", longestTrendIndex)
     let firstDay = new Date(_prices[longestTrendIndex - longestTrend + 1][0]).toUTCString().slice(0, -12)
     let lastDay = (new Date(_prices[longestTrendIndex][0]).toUTCString()).slice(0, -12)
-    console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
+    //console.log("Longest downward trend is: ", longestTrend, " days | From: " + firstDay + " to: " + lastDay)
     setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay + " ")
   }
 
