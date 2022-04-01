@@ -5,10 +5,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function DatePicker({ childToParent, API }) {
 
+  
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const [date2, setDate2] = useState(new Date());
+  const [datetoday, setDatetoday] = useState(new Date());
   const [show2, setShow2] = useState(false);
   const [text, setText] = useState('');
   const [text2, setText2] = useState('');
@@ -54,7 +56,6 @@ export default function DatePicker({ childToParent, API }) {
 
 
   function FetchData() {
-
     let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
     const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime()) / 1000
     let _endDate = new Date(date2)    
@@ -62,6 +63,24 @@ export default function DatePicker({ childToParent, API }) {
 
     const dayRange = (unixEndDate - unixStartDate - 3600) / 60 / 60 / 24
 
+    let _todayDate = new Date(datetoday)
+    const unixTodayDate= (new Date(Date.UTC(_todayDate.getFullYear(), _todayDate.getMonth(), _todayDate.getDate())).getTime()) / 1000
+  
+
+    if (unixStartDate>unixEndDate){
+      alert('Start date must be earlier than end date')
+      return
+    }else if (unixStartDate===unixEndDate-3600){
+      alert('Select different dates for start and end date')
+      return
+    } else if (unixStartDate>unixTodayDate){
+      alert('Selected dates cant be from the future')
+      return
+    } else if (unixEndDate-3600>unixTodayDate){
+      alert('Selected dates cant be from the future')
+      return
+    }
+    
     fetch(API + unixStartDate + "&to=" + unixEndDate)
       .then(res => res.json())
       .then(

@@ -12,9 +12,18 @@ export default function App() {
   const [currency, setCurrency] = useState("eur");
   const [parentData, setParentData] = useState([]);
   const [data, setData] = useState([]);
-
+  const [isDisabled, SetIsDisabled] = useState(true);
+ 
   const childToParent = (childData) => {
+    if (childData.length>4){
+      SetIsDisabled(false)
+    } else {
+      SetIsDisabled(true)
+      setShowChart(false);
+    }
     setParentData(childData);
+    setData(childData)
+     
   }
   const getCurrency = (childData) => {
     setCurrency(childData);
@@ -25,18 +34,18 @@ export default function App() {
 
   return (
     <View>
+
       <Header />
-      <DatePicker childToParent={childToParent} />
-      <DatePicker API={API} />
+      <DatePicker childToParent={childToParent} API={API} />
       <CurrencyPicker getCurrency={getCurrency}/>
       {showChart ? (
         <Text>Bitcoin price Chart</Text>,
         <Chart parentData={parentData} />
       ) : null}
       <Pressable>
-        <Button title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
+        <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
       </Pressable>
-      <MaximizeProfit parentData={parentData} />
+      <Text>Start and end date must have atleast 3 days between them to open</Text>
       <Footer />
     </View>
   );
