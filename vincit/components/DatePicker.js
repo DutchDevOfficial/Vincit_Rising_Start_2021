@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 export default function DatePicker({ childToParent }) {
 
   const [date, setDate] = useState(new Date());
+  const [datetoday, setDatetoday] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const [date2, setDate2] = useState(new Date());
@@ -60,13 +61,27 @@ export default function DatePicker({ childToParent }) {
 
     let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
     const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime()) / 1000
+    let _todayDate = new Date(datetoday)
+    const unixTodayDate= (new Date(Date.UTC(_todayDate.getFullYear(), _todayDate.getMonth(), _todayDate.getDate())).getTime()) / 1000
     let _endDate = new Date(date2)
     const unixEndDate = (new Date(Date.UTC(_endDate.getFullYear(), _endDate.getMonth(), _endDate.getDate())).getTime()) / 1000 + 3600
-
     const dayRange = (unixEndDate - unixStartDate - 3600) / 60 / 60 / 24
 
     console.log(new Date(unixStartDate).toUTCString())
 
+    if (unixStartDate>unixEndDate){
+      alert('Start date must be earlier than end date')
+      return
+    }else if (unixStartDate===unixEndDate-3600){
+      alert('Select different dates for start and end date')
+      return
+    } else if (unixStartDate>unixTodayDate){
+      alert('Selected dates cant be from the future')
+      return
+    } else if (unixEndDate-3600>unixTodayDate){
+      alert('Selected dates cant be from the future')
+      return
+    }
     fetch(url + unixStartDate + "&to=" + unixEndDate)
       .then(res => res.json())
       .then(
@@ -226,6 +241,7 @@ export default function DatePicker({ childToParent }) {
         <Text>{text}</Text>
         <Text>{text2}</Text>
         <Text>{text3}</Text>
+  
       </View>
       <Pressable>
         <Button title="confirm dates" onPress={confirm}></Button>
