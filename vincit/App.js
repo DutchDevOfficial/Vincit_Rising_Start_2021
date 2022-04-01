@@ -40,7 +40,7 @@ export default function App() {
       <Pressable>
         <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
       </Pressable>
-      <Text>Start and end date must have atleast 3 days between them to open chart.</Text>
+      <Text>Start and end date must have atleast 3 days between them to open</Text>
       <MaximizeProfit parentData={parentData} />
       <Text>This is a test1</Text>
       <Footer />
