@@ -145,13 +145,12 @@ export default function DatePicker({ childToParent, API }) {
 
 
     }
-    setText3("Max profit " + maxProfit + ' buy at ' + new Date(_prices[minIndex][0]).toUTCString().slice(0, -12) + 'sell at ' + new Date(_prices[maxIndex][0]).toUTCString().slice(0, -12))
+    // setText3("Max profit " + maxProfit + ' buy at ' + new Date(_prices[minIndex][0]).toUTCString().slice(0, -12) + 'sell at ' + new Date(_prices[maxIndex][0]).toUTCString().slice(0, -12))
   };
 
 
 
   function GetDownwardTrend(_prices) {
-    //console.log(_prices)
     let longestTrend = 1;
     let longestTrendIndex = 0; //index is reversed => get start index by substracting longest trend
     let currentTrend = 0;

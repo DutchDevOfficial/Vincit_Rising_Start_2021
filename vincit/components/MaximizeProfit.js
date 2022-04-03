@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
-export default function MaximizeProfit({ parentData }) {
+export default function MaximizeProfit({ parentData, currency}) {
   const [text, setText] = useState("");
 
   useEffect(() => {
@@ -17,7 +17,6 @@ export default function MaximizeProfit({ parentData }) {
       let min = prices[0][1];
       let minIndex = 0;
       let maxIndex = 0;
-      console.log(prices.length);
 
       for (let i = 1; i < prices.length; i++) {
         if (min > prices[i][1]) {
@@ -29,7 +28,7 @@ export default function MaximizeProfit({ parentData }) {
           maxProfit = Math.max(maxProfit, prices[i][1] - min);
           maxIndex = i;
         }
-        setText("For maximum profit of " + maxProfit.toFixed(2) + ' buy at ' + new Date(prices[minIndex][0]).toUTCString().slice(0, -12) + 'and sell at ' + new Date(prices[maxIndex][0]).toUTCString().slice(0, -12) + '.')
+        setText('For maximum profit of ' + maxProfit.toFixed(2)+ ' ' + currency + ' buy at ' + new Date(prices[minIndex][0]).toUTCString().slice(0, -12) + 'and sell at ' + new Date(prices[maxIndex][0]).toUTCString().slice(0, -12) + '.')
       }
     }
   }
