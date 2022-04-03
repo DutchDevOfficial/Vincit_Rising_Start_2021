@@ -1,11 +1,14 @@
 import { LineChart } from "react-native-chart-kit";
 import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState } from "react";
+import {ChartDot, ChartPath, ChartPathProvider, monotoneCubicInterpolation} from '@rainbow-me/animated-charts';
+import 'react-native-gesture-handler';
 
 export default function Chart({ parentData }) {
 
   let dates = []
   let prices = []
+  const screenWidth = Dimensions.get('window').width
 
   if(parentData.length>8){
     let divider = 2+Math.floor((parentData.length-8)/6)
@@ -65,6 +68,12 @@ export default function Chart({ parentData }) {
           borderRadius: 16
         }}
       />
+      <ChartPathProvider data={{ 
+         points: parentData.map(([x,y]) => ({x,y})),
+         smoothingStrategy: 'bezier' }}>
+      <ChartPath height={screenWidth / 2} stroke="yellow" width={screenWidth} />
+      <ChartDot style={{ backgroundColor: 'blue' }} />
+    </ChartPathProvider>
     </View>
   )
 }
