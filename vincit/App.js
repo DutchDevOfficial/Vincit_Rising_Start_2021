@@ -1,7 +1,7 @@
 import { Text, View, Button, Pressable, ScrollView } from 'react-native';
 import React, { useState } from "react";
 import DatePicker from './components/DatePicker';
-import Chart from './components/Chart';
+import ChartComponent from './components/Chart';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import styles from './style/style';
@@ -37,7 +37,7 @@ export default function App() {
         <DatePicker childToParent={childToParent} API={API} />
         {showChart ? (
           <Text>Bitcoin price Chart</Text>,
-          <Chart parentData={parentData} />
+          <ChartComponent parentData={parentData} />
         ) : null}
         <Pressable>
           <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />

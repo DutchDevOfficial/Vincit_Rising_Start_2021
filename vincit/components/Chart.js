@@ -1,8 +1,8 @@
-import { LineChart } from "react-native-chart-kit";
+import { Chart, Line, Area, HorizontalAxis, VerticalAxis } from 'react-native-responsive-linechart'
 import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState } from "react";
 
-export default function Chart({ parentData }) {
+export default function ChartComponent({ parentData }) {
 
   let dates = []
   let prices = []
@@ -30,41 +30,23 @@ export default function Chart({ parentData }) {
       prices.push(parentData[i][1].toFixed(2).slice(0, -6))
     }
   }
+  
+
+
 
   return (
     <View>
-      <Text>Bitcoin price chart</Text>
-      <LineChart
-        data={{
-          labels: dates,
-          datasets: [{data: prices}]
-        }}
-        width={Dimensions.get("window").width} // from react-native
-        height={220}
-        yAxisLabel="$"
-        yAxisSuffix="k"
-        yAxisInterval={1} // optional, defaults to 1
-        chartConfig={{
-          backgroundColor: "#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#ffa726",
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: "#ffa726"
-          }
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16
-        }}
-      />
+      <Chart
+  style={{ height: 200, width: '100%', backgroundColor: '#eee' }}
+  xDomain={{ min: -2, max: 10 }}
+  yDomain={{ min: -2, max: 20 }}
+  padding={{ left: 20, top: 10, bottom: 10, right: 10 }}
+>
+  <VerticalAxis tickValues={[0, 4, 8, 12, 16, 20]} />
+  <HorizontalAxis tickCount={3} />
+  <Line data={data1} smoothing="none" theme={{ stroke: { color: 'red', width: 1 } }} />
+
+</Chart>
     </View>
   )
 }
