@@ -22,12 +22,16 @@ export default function Chart({ parentData }) {
   } else if (true === false) {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(17, -7))
-      prices.push(parentData[i][1].toFixed(2).slice(0, -6))
+      prices.push(parentData[i][1].toFixed(0))
+      console.log(parentData[i][1].toFixed(0))
+      
     }
   } else {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(4, -18))
-      prices.push(parentData[i][1].toFixed(2).slice(0, -6))
+      prices.push(parentData[i][1].toFixed(0))
+      console.log(parentData[i][1].toFixed(0))
+     
     }
   }
 
