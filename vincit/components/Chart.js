@@ -1,14 +1,11 @@
 import { LineChart } from "react-native-chart-kit";
 import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState } from "react";
-import {ChartDot, ChartPath, ChartPathProvider, monotoneCubicInterpolation} from '@rainbow-me/animated-charts';
-import 'react-native-gesture-handler';
 
 export default function Chart({ parentData }) {
 
   let dates = []
   let prices = []
-  const screenWidth = Dimensions.get('window').width
 
   if(parentData.length>8){
     let divider = 2+Math.floor((parentData.length-8)/6)
@@ -25,12 +22,16 @@ export default function Chart({ parentData }) {
   } else if (true === false) {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(17, -7))
-      prices.push(parentData[i][1].toFixed(2).slice(0, -6))
+      prices.push(parentData[i][1].toFixed(0))
+      console.log(parentData[i][1].toFixed(0))
+      
     }
   } else {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(4, -18))
-      prices.push(parentData[i][1].toFixed(2).slice(0, -6))
+      prices.push(parentData[i][1].toFixed(0))
+      console.log(parentData[i][1].toFixed(0))
+     
     }
   }
 
@@ -68,12 +69,6 @@ export default function Chart({ parentData }) {
           borderRadius: 16
         }}
       />
-      <ChartPathProvider data={{ 
-         points: parentData.map(([x,y]) => ({x,y})),
-         smoothingStrategy: 'bezier' }}>
-      <ChartPath height={screenWidth / 2} stroke="yellow" width={screenWidth} />
-      <ChartDot style={{ backgroundColor: 'blue' }} />
-    </ChartPathProvider>
     </View>
   )
 }

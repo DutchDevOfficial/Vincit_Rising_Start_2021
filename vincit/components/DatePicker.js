@@ -1,4 +1,4 @@
-import { Text, View, Button, Platform, Pressable, Dimensions } from 'react-native';
+import { Text, View, Button, Platform, Pressable } from 'react-native';
 import React, { useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -80,7 +80,7 @@ export default function DatePicker({ childToParent, API }) {
       alert('Selected dates cant be from the future')
       return
     }
-
+    
     fetch(API + unixStartDate + "&to=" + unixEndDate)
       .then(res => res.json())
       .then(
@@ -174,7 +174,6 @@ export default function DatePicker({ childToParent, API }) {
     setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay + " ")
   }
 
-  
 
 
 
@@ -239,7 +238,6 @@ export default function DatePicker({ childToParent, API }) {
         <Text>{text2}</Text>
         <Text>{text3}</Text>
       </View>
-      
       <Pressable>
         <Button title="confirm dates" onPress={confirm}></Button>
       </Pressable>
