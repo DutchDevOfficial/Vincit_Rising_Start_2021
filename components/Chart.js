@@ -1,6 +1,7 @@
 import { LineChart } from "react-native-chart-kit";
 import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState } from "react";
+import style from '../style/style';
 
 export default function Chart({ parentData }) {
 

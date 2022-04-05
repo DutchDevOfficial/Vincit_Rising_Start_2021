@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, View } from 'react-native';
-import styles from '../style/style';
+import style from '../style/style';
 
 export default function Footer() {
     return(
-        <View style={styles.footer}>
-            <Text style={styles.author}>
+        <View style={style.footer}>
+            <Text style={style.author}>
                 Author: Study Group 5
             </Text>
         </View>

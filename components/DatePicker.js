@@ -1,6 +1,7 @@
 import { Text, View, Button, Platform, Pressable } from 'react-native';
 import React, { useState } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import style from '../style/style';
 
 
 export default function DatePicker({ childToParent, API }) {
@@ -178,12 +179,12 @@ export default function DatePicker({ childToParent, API }) {
 
 
   return (
-    <View>
+    <View style={style.container}>
       <View>
-        <Text>Start date</Text>
+        <Text style={style.text}>Start date</Text>
         <Pressable
           onPress={toggle}>
-          <Text>
+          <Text style={style.text}>
             {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
           </Text>
         </Pressable>
@@ -208,10 +209,10 @@ export default function DatePicker({ childToParent, API }) {
         )}
       </View>
       <View>
-        <Text>End date</Text>
+        <Text style={style.text}>End date</Text>
         <Pressable
           onPress={toggle2}>
-          <Text>
+          <Text style={style.text}>
             {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}
           </Text>
         </Pressable>
@@ -238,8 +239,8 @@ export default function DatePicker({ childToParent, API }) {
         <Text>{text2}</Text>
         <Text>{text3}</Text>
       </View>
-      <Pressable>
-        <Button title="confirm dates" onPress={confirm}></Button>
+      <Pressable style={style.button} onPress={confirm}>
+        <Text style={style.buttonText}>Confirm dates</Text>
       </Pressable>
     </View>
   );

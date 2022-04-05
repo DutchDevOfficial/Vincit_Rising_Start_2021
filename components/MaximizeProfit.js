@@ -1,5 +1,6 @@
-import { View, Text } from 'react-native'
-import React, { useState, useEffect } from 'react'
+import { View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import style from '../style/style';
 
 export default function MaximizeProfit({ parentData, currency}) {
   const [text, setText] = useState("");
@@ -34,8 +35,8 @@ export default function MaximizeProfit({ parentData, currency}) {
   }
 
   return (
-    <View>
-      <Text>Maximize Profit</Text>
+    <View style={style.container}>
+      <Text style={style.text2}>Maximize Profit</Text>
       <Text>{text}</Text>
     </View>
   )

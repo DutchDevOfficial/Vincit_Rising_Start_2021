@@ -4,7 +4,7 @@ import DatePicker from './components/DatePicker';
 import ChartComponent from './components/Chart';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import styles from './style/style';
+import style from './style/style';
 import MaximizeProfit from './components/MaximizeProfit';
 import CurrencyPicker from './components/CurrencyPicker';
 
@@ -30,7 +30,7 @@ export default function App() {
   const API = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=" + currency + "&from="
 
   return (
-    <View>
+    <View style={style.containerBackground}>
       <ScrollView>
         <Header />
         <CurrencyPicker getCurrency={getCurrency} />
@@ -39,10 +39,12 @@ export default function App() {
           <Text>Bitcoin price Chart</Text>,
           <ChartComponent parentData={parentData} />
         ) : null}
-        <Pressable>
+        <Pressable style={style.container}>
           <Button disabled={isDisabled} title="show/hide price chart" onPress={() => setShowChart(!showChart)} />
         </Pressable>
-        <Text>Start and end date must have atleast 3 days between them to open</Text>
+        <View style={style.container}>
+          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open</Text>
+        </View>
         <MaximizeProfit parentData={parentData} currency={currency} />
         <Footer />
       </ScrollView>
