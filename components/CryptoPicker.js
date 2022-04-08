@@ -1,5 +1,5 @@
-import { View, Text, Pressable } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { Picker } from '@react-native-picker/picker';
 import style from '../style/style';
 
@@ -12,8 +12,10 @@ export default function CryptoPicker({ getCrypto, listAPI }) {
       "name": "Bitcoin",
       "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
     }]);
-  
-    const [Enabled, setEnabled] = useState(false);
+
+  useEffect(() => {
+    FetchCryptos()
+  }, [listAPI]);
 
   function FetchCryptos() {
     fetch(listAPI)
@@ -28,10 +30,11 @@ export default function CryptoPicker({ getCrypto, listAPI }) {
         }
       )
   }
+
   return (
     <View style={style.container}>
       <Text style={style.text}>Select crypto</Text>
-      <Picker enabled={Enabled}
+      <Picker
         style={style.field}
         selectedValue={selectedCrypto}
         onValueChange={(itemValue) => {
@@ -42,9 +45,6 @@ export default function CryptoPicker({ getCrypto, listAPI }) {
           <Picker.Item label={crypto.name} value={crypto.id} key={crypto} />
         ))}
       </Picker>
-      <Pressable style={style.button} onPress={() => {FetchCryptos(); setEnabled(true);}}>
-        <Text style={style.buttonText}>Fetch cryptos</Text>
-      </Pressable>
     </View>
   )
 }
