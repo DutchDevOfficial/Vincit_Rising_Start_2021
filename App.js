@@ -60,7 +60,7 @@ export default function App() {
         </Pressable>
         </View>
         <View style={style.container}>
-          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open. Chart is only for bitcoin.</Text>
+          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open.</Text>
         </View>
         <MaximizeProfit parentData={parentData} currency={currency} />
         <Footer />

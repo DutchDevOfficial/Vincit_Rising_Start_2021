@@ -1,5 +1,5 @@
-import { Text, View, Button, Platform, Pressable } from 'react-native';
-import React, { useState } from "react";
+import { Text, View, Platform, Pressable } from 'react-native';
+import React, { useState, useEffect } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
 
@@ -52,6 +52,13 @@ export default function DatePicker({ childToParent, API }) {
     FetchData();
   }
 
+  useEffect(() => {
+    if (text === '') {
+      return;
+    } else {
+      FetchData();
+    }
+  }, [API]);
 
   const [output, setOutput] = useState("")
 
