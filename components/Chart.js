@@ -24,14 +24,14 @@ export default function Chart({ parentData }) {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(17, -7))
       prices.push(parentData[i][1].toFixed(0))
-      console.log(parentData[i][1].toFixed(0))
+     
       
     }
   } else {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(4, -18))
       prices.push(parentData[i][1].toFixed(0))
-      console.log(parentData[i][1].toFixed(0))
+      
      
     }
   }
@@ -47,7 +47,7 @@ export default function Chart({ parentData }) {
         width={Dimensions.get("window").width} // from react-native
         height={220}
         yAxisLabel="$"
-        yAxisSuffix="k"
+        yAxisSuffix=""
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
           backgroundColor: "#e26a00",

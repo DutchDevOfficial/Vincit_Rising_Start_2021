@@ -17,7 +17,7 @@ export default function App() {
   const [buttonText, setButtonText] = useState("Show price chart");
 
   const childToParent = (childData) => {
-    if (childData.length > 4 && crypto == "bitcoin") {
+    if (childData.length > 4 ) {
       SetIsDisabled(false)
     } else {
       SetIsDisabled(true)
@@ -34,7 +34,7 @@ export default function App() {
   }
 
   const [showChart, setShowChart] = useState(false);
-  const API = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=" + currency + "&from="
+  const API = "https://api.coingecko.com/api/v3/coins/" + crypto + "/market_chart/range?vs_currency=" + currency + "&from="
   const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency + "&order=market_cap_desc&per_page=10"
 
   return (
