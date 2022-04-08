@@ -46,7 +46,7 @@ export default function App() {
         <DatePicker childToParent={childToParent} API={API} />
         {showChart ? (
           <Text>Bitcoin price Chart</Text>,
-          <ChartComponent parentData={parentData} />
+          <ChartComponent parentData={parentData} currency={currency}/>
         ) : null}
         <View style={style.container}>
         <Pressable style={style.button} disabled={isDisabled} onPress={() => {
