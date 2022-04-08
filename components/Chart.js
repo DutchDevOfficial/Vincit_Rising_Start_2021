@@ -1,9 +1,9 @@
 import { LineChart } from "react-native-chart-kit";
 import { Text, View, Button, Pressable, Dimensions } from 'react-native';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from '../style/style';
 
-export default function Chart({ parentData }) {
+export default function Chart({ parentData, currency }) {
 
   let dates = []
   let prices = []
@@ -30,11 +30,22 @@ export default function Chart({ parentData }) {
   } else {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(4, -18))
-      prices.push(parentData[i][1].toFixed(0))
-      
-     
+      prices.push(parentData[i][1].toFixed(0))   
     }
   }
+
+  const [_currency, set_currency] = useState("€")
+  useEffect(() => {
+    switch (currency) {
+      case "eur":
+        set_currency("€")
+        break;
+    case "usd":
+      set_currency("$")
+      default:
+        break;
+    }
+  }, [parentData])
 
   return (
     <View>
@@ -46,7 +57,7 @@ export default function Chart({ parentData }) {
         }}
         width={Dimensions.get("window").width} // from react-native
         height={220}
-        yAxisLabel="$"
+        yAxisLabel={_currency}
         yAxisSuffix=""
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{
