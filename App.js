@@ -48,6 +48,7 @@ export default function App() {
           <Text>Bitcoin price Chart</Text>,
           <ChartComponent parentData={parentData} />
         ) : null}
+        <View style={style.container}>
         <Pressable style={style.button} disabled={isDisabled} onPress={() => {
           setShowChart(!showChart);
           showChart ? setButtonText("Show price chart") : setButtonText("Hide price chart");
@@ -57,6 +58,7 @@ export default function App() {
             {buttonText}
           </Text>
         </Pressable>
+        </View>
         <View style={style.container}>
           <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open. Chart is only for bitcoin.</Text>
         </View>
