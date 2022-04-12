@@ -23,14 +23,14 @@ export default function Chart({ parentData, currency }) {
   } else if (true === false) {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(17, -7))
-      prices.push(parentData[i][1].toFixed(0))
+      prices.push(parentData[i][1])
      
       
     }
   } else {
     for (let i = 0; i < parentData.length; i++) {
       dates.push(new Date(parentData[i][0]).toUTCString().slice(4, -18))
-      prices.push(parentData[i][1].toFixed(0))   
+      prices.push(parentData[i][1])   
     }
   }
 
