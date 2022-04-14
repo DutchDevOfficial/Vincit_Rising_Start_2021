@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
 
 
-export default function DatePicker({ childToParent, API }) {
+export default function DatePicker({ childToParent, childToParent2, API }) {
 
   
   const [date, setDate] = useState(new Date());
@@ -99,7 +99,12 @@ export default function DatePicker({ childToParent, API }) {
           for (let i = 0; i < result.prices.length; i++) {
             //console.log(i, result.prices[i])
             //console.log(new Date(result.prices[i][0]).toUTCString())
-            if (dayRange < 90) {
+            if (dayRange<4){
+              _prices.push(result.prices[i])
+              _prices2.push(result.prices[i])
+              _totalVolume.push(result.total_volumes[i])
+              console.log(result.prices[i])
+            } else if (dayRange < 90) {
               if (i % 24 == 0 || unixStartDate < 1527120000) { //limit to 1 result, closest to 00:00 UTC || also test if earlier than 2018.5.23, otherwise will result in errors
                 _prices.push(result.prices[i])
                 _prices2.push(result.prices[i])
@@ -112,6 +117,7 @@ export default function DatePicker({ childToParent, API }) {
             }
           }
           childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
+          childToParent2(dayRange)
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
