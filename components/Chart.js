@@ -3,7 +3,7 @@ import { Text, View, Button, Pressable, Dimensions } from 'react-native';
 import React, { useState, useEffect } from "react";
 import style from '../style/style';
 
-export default function Chart({ parentData, currency, parentData2 }) {
+export default function Chart({ parentData, currency, parentData2, parentData3 }) {
 
   let dates = []
   let prices = []
@@ -15,17 +15,22 @@ export default function Chart({ parentData, currency, parentData2 }) {
       })
       parentData = x
   }
+  if(parentData3.length>8){
+    let divider = 2+Math.floor((parentData3.length-8)/6)
+      let x = parentData3.filter((element, index) => {   
+        return index % divider === 0;
+      })
+      parentData3 = x
+  }
     
       
 
   if (parentData === "undefined") {
     return null;
   } else if (4>parentData2) {
-    for (let i = 0; i < parentData.length; i++) {
-      dates.push(new Date(parentData[i][0]).toUTCString().slice(17, -7))
-      prices.push(parentData[i][1])
-     
-      
+    for (let i = 0; i < parentData3.length; i++) {
+      dates.push(new Date(parentData3[i][0]).toUTCString().slice(17, -7))
+      prices.push(parentData3[i][1])
     }
   } else {
     for (let i = 0; i < parentData.length; i++) {

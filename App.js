@@ -14,6 +14,7 @@ export default function App() {
   const [crypto, setCrypto] = useState("bitcoin");
   const [parentData, setParentData] = useState([]);
   const [parentData2, setParentData2] = useState('');
+  const [parentData3, setParentData3] = useState([]);
   //const [isDisabled, SetIsDisabled] = useState(true);
   const [buttonText, setButtonText] = useState("Show price chart");
 
@@ -27,15 +28,12 @@ export default function App() {
    
     setParentData(childData);
   }
-  const childToParent2 = (childData2) => {
-    // if (childData.length > 4 ) {
-     //  SetIsDisabled(false)
-    // } else {
-    //   SetIsDisabled(true)
-    //   setShowChart(false);
-    // }
+  const childToParent2 = (childData2) => {   
      setParentData2(childData2);
    }
+   const childToParent3 = (childData3) => {   
+    setParentData3(childData3);
+  }
   const getCurrency = (childData) => {
     setCurrency(childData);
   }
@@ -54,10 +52,10 @@ export default function App() {
         <Header />
         <CurrencyPicker getCurrency={getCurrency} />
         <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
-        <DatePicker childToParent={childToParent}  childToParent2={childToParent2} API={API} />
+        <DatePicker childToParent={childToParent}  childToParent2={childToParent2} childToParent3={childToParent3} API={API} />
         {showChart ? (
           <Text>Bitcoin price Chart</Text>,
-          <ChartComponent parentData={parentData} currency={currency} parentData2={parentData2}/>
+          <ChartComponent parentData={parentData} currency={currency} parentData2={parentData2} parentData3={parentData3}/>
         ) : null}
         <View style={style.container}>
         <Pressable style={style.button} onPress={() => {
