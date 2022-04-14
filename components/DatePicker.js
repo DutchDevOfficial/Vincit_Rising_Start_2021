@@ -4,7 +4,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
 
 
-export default function DatePicker({ childToParent, childToParent2, API }) {
+export default function DatePicker({ childToParent, childToParent2,childToParent3, API }) {
 
   
   const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
@@ -96,16 +96,12 @@ export default function DatePicker({ childToParent, childToParent2, API }) {
         (result) => {
           let _prices = new Array
           let _prices2 = new Array
+          let _prices3 = new Array
           let _totalVolume = new Array
           for (let i = 0; i < result.prices.length; i++) {
             //console.log(i, result.prices[i])
             //console.log(new Date(result.prices[i][0]).toUTCString())
-            if (dayRange<4){
-              _prices.push(result.prices[i])
-              _prices2.push(result.prices[i])
-              _totalVolume.push(result.total_volumes[i])
-              console.log(result.prices[i])
-            } else if (dayRange < 90) {
+            if (dayRange < 90) {
               if (i % 24 == 0 || unixStartDate < 1527120000) { //limit to 1 result, closest to 00:00 UTC || also test if earlier than 2018.5.23, otherwise will result in errors
                 _prices.push(result.prices[i])
                 _prices2.push(result.prices[i])
@@ -116,9 +112,13 @@ export default function DatePicker({ childToParent, childToParent2, API }) {
               _prices2.push(result.prices[i])
               _totalVolume.push(result.total_volumes[i])
             }
+            if (dayRange<4){
+              _prices3.push(result.prices[i])
+            } 
           }
           childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
           childToParent2(dayRange)
+          childToParent3(_prices3)
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
@@ -169,6 +169,7 @@ export default function DatePicker({ childToParent, childToParent2, API }) {
     let longestTrend = 1;
     let longestTrendIndex = 0; //index is reversed => get start index by substracting longest trend
     let currentTrend = 0;
+
 
     for (let i = 0; i < _prices.length - 1; i++) { //reqursively test longest downward trend
       if (_prices[i + 1][1] < _prices[i][1]) {
