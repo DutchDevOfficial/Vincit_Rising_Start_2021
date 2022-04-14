@@ -1,5 +1,5 @@
 import { Text, View, Platform, Pressable } from 'react-native';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
 
@@ -7,7 +7,7 @@ import style from '../style/style';
 export default function DatePicker({ childToParent, childToParent2, API }) {
 
   
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
   const [show, setShow] = useState(false);
 
   const [date2, setDate2] = useState(new Date());
@@ -48,9 +48,10 @@ export default function DatePicker({ childToParent, childToParent2, API }) {
     setShow2(prevShow2 => !prevShow2);
   }
 
-  const confirm = () => {
-    FetchData();
-  }
+  useEffect(() => {
+    FetchData()
+  }, [date, date2])
+  
 
   useEffect(() => {
     if (text === '') {
@@ -252,9 +253,6 @@ export default function DatePicker({ childToParent, childToParent2, API }) {
         <Text>{text2}</Text>
         <Text>{text3}</Text>
       </View>
-      <Pressable style={style.button} onPress={confirm}>
-        <Text style={style.buttonText}>Confirm dates</Text>
-      </Pressable>
     </View>
   );
 }
