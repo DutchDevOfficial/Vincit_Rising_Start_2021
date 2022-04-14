@@ -34,6 +34,7 @@ export default function Chart({ parentData, currency }) {
     }
   }
 
+  const [_decimal, set_decimal] = useState(0)
   const [_currency, set_currency] = useState("€")
   useEffect(() => {
     switch (currency) {
@@ -45,7 +46,14 @@ export default function Chart({ parentData, currency }) {
       default:
         break;
     }
+    if (parentData[0][1] > 100){
+      set_decimal(0)
+    } else {
+      set_decimal(2)
+    }
   }, [parentData])
+
+   
 
   return (
     <View>
@@ -64,7 +72,7 @@ export default function Chart({ parentData, currency }) {
           backgroundColor: "#e26a00",
           backgroundGradientFrom: "#fb8c00",
           backgroundGradientTo: "#ffa726",
-          decimalPlaces: 0, // optional, defaults to 2dp
+          decimalPlaces: _decimal, // optional, defaults to 2dp
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           style: {
