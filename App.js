@@ -24,6 +24,7 @@ export default function App() {
    //   SetIsDisabled(true)
    //   setShowChart(false);
    // }
+   
     setParentData(childData);
   }
   const childToParent2 = (childData2) => {
@@ -68,9 +69,6 @@ export default function App() {
             {buttonText}
           </Text>
         </Pressable>
-        </View>
-        <View style={style.container}>
-          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open.</Text>
         </View>
         <MaximizeProfit parentData={parentData} currency={currency} />
         <Footer />
