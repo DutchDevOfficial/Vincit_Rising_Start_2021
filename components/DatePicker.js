@@ -2,6 +2,9 @@ import { Text, View, Platform, Pressable } from 'react-native';
 import React, { useState, useEffect } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCalendarDay  } from '@fortawesome/free-solid-svg-icons/faCalendarDay';
+import { TouchableOpacity } from 'react-native';
 
 
 export default function DatePicker({ childToParent, API }) {
@@ -186,13 +189,13 @@ export default function DatePicker({ childToParent, API }) {
 
 
   return (
-    <View style={style.container}>
+    <View style={style.slotContainer}>
       <View>
         <Text style={style.text}>Start date</Text>
         <Pressable
           onPress={toggle}>
-          <Text style={style.text}>
-            {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
+          <Text style={style.datePicker}>
+            {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
           </Text>
         </Pressable>
         {show && Platform.OS === 'ios' && (
@@ -219,8 +222,8 @@ export default function DatePicker({ childToParent, API }) {
         <Text style={style.text}>End date</Text>
         <Pressable
           onPress={toggle2}>
-          <Text style={style.text}>
-            {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}
+          <Text style={style.datePicker}>
+            {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
           </Text>
         </Pressable>
         {show2 && Platform.OS === 'ios' && (
@@ -242,13 +245,18 @@ export default function DatePicker({ childToParent, API }) {
             maximumDate={new Date()}
           />
         )}
-        <Text>{text}</Text>
-        <Text>{text2}</Text>
-        <Text>{text3}</Text>
+        <Text style={style.text2}>{text}</Text>
+        <Text style={style.text2}>{text2}</Text>
+        {/* <Text style={style.text2}>{text3}</Text> */}
       </View>
-      <Pressable style={style.button} onPress={confirm}>
+      {/* <Pressable style={style.button} onPress={confirm}>
         <Text style={style.buttonText}>Confirm dates</Text>
-      </Pressable>
+      </Pressable> */}
+      <TouchableOpacity
+        style={style.button}
+        onPress={confirm}>
+        <Text style={style.buttonText}>CONFIRM DATES</Text>
+      </TouchableOpacity>
     </View>
   );
 }

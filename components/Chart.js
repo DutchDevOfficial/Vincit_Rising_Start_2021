@@ -48,8 +48,8 @@ export default function Chart({ parentData, currency }) {
   }, [parentData])
 
   return (
-    <View>
-      <Text>Bitcoin price chart</Text>
+    <View style={style.container}>
+      <Text style={style.text2}>Bitcoin price chart</Text>
       <LineChart
         data={{
           labels: dates,

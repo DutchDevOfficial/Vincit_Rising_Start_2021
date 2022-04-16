@@ -7,7 +7,7 @@ export default function CurrencyPicker({ getCurrency }) {
   const [selectedCurrency, setSelectedCurrency] = useState("eur");
 
   return (
-    <View style={style.container}>
+    <View style={style.slotContainer}>
       <Text style={style.text}>Select currency</Text>
       <Picker
         style={style.field}

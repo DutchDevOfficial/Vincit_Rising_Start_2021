@@ -10,19 +10,22 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-native-fontawesome": "^0.2.7",
     "@react-native-community/datetimepicker": "4.0.0",
     "@react-native-picker/picker": "2.2.1",
     "expo": "~44.0.0",
+    "expo-font": "~10.0.4",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-chart-kit": "^6.12.0",
+    "react-native-gesture-handler": "~2.1.0",
     "react-native-responsive-linechart": "^5.7.1",
     "react-native-svg": "12.1.1",
-    "react-native-web": "0.17.1",
-    "react-native-gesture-handler": "~2.1.0",
-    "expo-font": "~10.0.4"
+    "react-native-web": "0.17.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

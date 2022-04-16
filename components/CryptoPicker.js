@@ -32,7 +32,7 @@ export default function CryptoPicker({ getCrypto, listAPI }) {
   }
 
   return (
-    <View style={style.container}>
+    <View style={style.slotContainer}>
       <Text style={style.text}>Select crypto</Text>
       <Picker
         style={style.field}

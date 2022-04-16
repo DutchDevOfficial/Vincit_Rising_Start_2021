@@ -1,4 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { Dimensions } from 'react-native';
+
+const config = {
+  deviceWidth: Dimensions.get('window').width,
+  deviceHeight: Dimensions.get('window').height
+}
 
 export default StyleSheet.create({
   container: {
@@ -6,20 +12,48 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,
+
+    //I hope these are necessary
+    marginRight: config.deviceWidth * 0.1,
+    marginLeft: config.deviceWidth * 0.1,
+    
   },
   containerBackground: {
     flex: 1,
     backgroundColor: '#35393C',
     //backgroundColor: 'white',
   },
+  slotContainer: {
+    backgroundColor: '#fc8717',
+    // backgroundColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    paddingBottom: 10,
+    marginRight: config.deviceWidth * 0.1,
+    marginLeft: config.deviceWidth * 0.1,
+    padding: 20,
+    shadowOpacity: 0.5,
+    borderRadius: 5,
+    shadowRadius: 10,
+    shadowColor:'#000',
+    shadowOffset:{width:2, height:6},
+    elevation: 5,
+    // background color must be set
+    //backgroundColor : "#0000", // invisible color,
+    backgroundColor : "#4f4f4f",
+    
+  },  
   text: {
     color: '#fff',
     fontSize: 20,
+    alignSelf: 'center',
     //fontFamily: 'SansArabicRegular',
   },  
   text2: {
     color: '#fff',
     fontSize: 17,
+    marginTop: 5,
   },
   header: {
     marginTop: 30,
@@ -52,11 +86,13 @@ export default StyleSheet.create({
     //margin: 30,
     flexDirection: "row",
     padding: 5,
-    backgroundColor: "#f36f57",
-    width: 150,
+    backgroundColor: '#707070',
+    //backgroundColor: "#f36f57",
+    width: 250,
     borderRadius: 3,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 15,
   },
   buttonText: {
     color:"#F0FFFF",
@@ -81,4 +117,20 @@ export default StyleSheet.create({
     display: 'flex', 
     backgroundColor: '#fff'
   },
+  datePicker: {
+    color: 'black',
+    fontSize: 20,
+    marginTop: 5,
+    backgroundColor: 'white',
+    borderRadius: 3,
+    paddingLeft: 15,
+    paddingRight: 15,
+    alignSelf: 'center',
+    borderStyle: 'solid',
+    // borderStartWidth: 1,
+    borderLeftWidth: 1,
+    borderBottomWidth: 1,
+    borderRightWidth: 1,
+    borderTopWidth: 1,
+  },  
 });

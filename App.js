@@ -1,4 +1,4 @@
-import { Text, View, Pressable, ScrollView } from 'react-native';
+import { Text, View, Pressable, ScrollView, TouchableOpacity } from 'react-native';
 import React, { useState } from "react";
 import DatePicker from './components/DatePicker';
 import ChartComponent from './components/Chart';
@@ -43,24 +43,24 @@ export default function App() {
         <Header />
         <CurrencyPicker getCurrency={getCurrency} />
         <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
+        <View style={style.container}>
+          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open.</Text>
+        </View>
         <DatePicker childToParent={childToParent} API={API} />
         {showChart ? (
-          <Text>Bitcoin price Chart</Text>,
+          <Text style={style.text}>Bitcoin price Chart</Text>,
           <ChartComponent parentData={parentData} currency={currency}/>
         ) : null}
         <View style={style.container}>
-        <Pressable style={style.button} disabled={isDisabled} onPress={() => {
+        <TouchableOpacity style={style.button} disabled={isDisabled} onPress={() => {
           setShowChart(!showChart);
-          showChart ? setButtonText("Show price chart") : setButtonText("Hide price chart");
+          showChart ? setButtonText("SHOW PRICE CHART") : setButtonText("HIDE PRICE CHART");
         }}
         >
           <Text style={style.buttonText}>
             {buttonText}
           </Text>
-        </Pressable>
-        </View>
-        <View style={style.container}>
-          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open.</Text>
+        </TouchableOpacity>
         </View>
         <MaximizeProfit parentData={parentData} currency={currency} />
         <Footer />
