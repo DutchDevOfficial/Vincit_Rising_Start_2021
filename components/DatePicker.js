@@ -1,5 +1,5 @@
 import { Text, View, Platform, Pressable } from 'react-native';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -7,10 +7,10 @@ import { faCalendarDay  } from '@fortawesome/free-solid-svg-icons/faCalendarDay'
 import { TouchableOpacity } from 'react-native';
 
 
-export default function DatePicker({ childToParent, API }) {
+export default function DatePicker({ childToParent, childToParent2,childToParent3, API }) {
 
   
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
   const [show, setShow] = useState(false);
 
   const [date2, setDate2] = useState(new Date());
@@ -51,9 +51,10 @@ export default function DatePicker({ childToParent, API }) {
     setShow2(prevShow2 => !prevShow2);
   }
 
-  const confirm = () => {
-    FetchData();
-  }
+  useEffect(() => {
+    FetchData()
+  }, [date, date2])
+  
 
   useEffect(() => {
     if (text === '') {
@@ -98,6 +99,7 @@ export default function DatePicker({ childToParent, API }) {
         (result) => {
           let _prices = new Array
           let _prices2 = new Array
+          let _prices3 = new Array
           let _totalVolume = new Array
           for (let i = 0; i < result.prices.length; i++) {
             //console.log(i, result.prices[i])
@@ -113,8 +115,13 @@ export default function DatePicker({ childToParent, API }) {
               _prices2.push(result.prices[i])
               _totalVolume.push(result.total_volumes[i])
             }
+            if (dayRange<4){
+              _prices3.push(result.prices[i])
+            } 
           }
           childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
+          childToParent2(dayRange)
+          childToParent3(_prices3)
           GetDownwardTrend(_prices)
           GetHighestVolume(_totalVolume)
           maxProfit(_prices)
@@ -165,6 +172,7 @@ export default function DatePicker({ childToParent, API }) {
     let longestTrend = 1;
     let longestTrendIndex = 0; //index is reversed => get start index by substracting longest trend
     let currentTrend = 0;
+
 
     for (let i = 0; i < _prices.length - 1; i++) { //reqursively test longest downward trend
       if (_prices[i + 1][1] < _prices[i][1]) {
@@ -249,14 +257,6 @@ export default function DatePicker({ childToParent, API }) {
         <Text style={style.text2}>{text2}</Text>
         {/* <Text style={style.text2}>{text3}</Text> */}
       </View>
-      {/* <Pressable style={style.button} onPress={confirm}>
-        <Text style={style.buttonText}>Confirm dates</Text>
-      </Pressable> */}
-      <TouchableOpacity
-        style={style.button}
-        onPress={confirm}>
-        <Text style={style.buttonText}>CONFIRM DATES</Text>
-      </TouchableOpacity>
     </View>
   );
 }

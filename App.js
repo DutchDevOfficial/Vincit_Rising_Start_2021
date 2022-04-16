@@ -13,17 +13,26 @@ export default function App() {
   const [currency, setCurrency] = useState("eur");
   const [crypto, setCrypto] = useState("bitcoin");
   const [parentData, setParentData] = useState([]);
-  const [isDisabled, SetIsDisabled] = useState(true);
+  const [parentData2, setParentData2] = useState('');
+  const [parentData3, setParentData3] = useState([]);
+  //const [isDisabled, SetIsDisabled] = useState(true);
   const [buttonText, setButtonText] = useState("Show price chart");
 
   const childToParent = (childData) => {
-    if (childData.length > 4 ) {
-      SetIsDisabled(false)
-    } else {
-      SetIsDisabled(true)
-      setShowChart(false);
-    }
+   // if (childData.length > 4 ) {
+    //  SetIsDisabled(false)
+   // } else {
+   //   SetIsDisabled(true)
+   //   setShowChart(false);
+   // }
+   
     setParentData(childData);
+  }
+  const childToParent2 = (childData2) => {   
+     setParentData2(childData2);
+   }
+   const childToParent3 = (childData3) => {   
+    setParentData3(childData3);
   }
   const getCurrency = (childData) => {
     setCurrency(childData);
@@ -43,16 +52,13 @@ export default function App() {
         <Header />
         <CurrencyPicker getCurrency={getCurrency} />
         <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
-        <View style={style.container}>
-          <Text style={style.text2}>NOTICE: Start and end date must have atleast 3 days between them to open.</Text>
-        </View>
-        <DatePicker childToParent={childToParent} API={API} />
+        <DatePicker childToParent={childToParent}  childToParent2={childToParent2} childToParent3={childToParent3} API={API} />
         {showChart ? (
-          <Text style={style.text}>Bitcoin price Chart</Text>,
-          <ChartComponent parentData={parentData} currency={currency}/>
+          <Text>Bitcoin price Chart</Text>,
+          <ChartComponent parentData={parentData} currency={currency} parentData2={parentData2} parentData3={parentData3}/>
         ) : null}
         <View style={style.container}>
-        <TouchableOpacity style={style.button} disabled={isDisabled} onPress={() => {
+        <TouchableOpacity style={style.button} onPress={() => {
           setShowChart(!showChart);
           showChart ? setButtonText("SHOW PRICE CHART") : setButtonText("HIDE PRICE CHART");
         }}
