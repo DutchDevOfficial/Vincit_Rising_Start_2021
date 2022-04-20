@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
-import { useFocusEffect } from "@react-navigation/native";
+import { Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { TabActions, useFocusEffect } from "@react-navigation/native";
 import style from '../style/style';
 
-export default function MarketScreen() {
+export default function MarketScreen({ navigation }) {
   const [currency, setCurrency] = useState("eur");
   const [cryptoList, setCryptoList] = useState([
     {
@@ -56,16 +56,20 @@ export default function MarketScreen() {
       )
   }
 
-  function onPress() {
-    return;
-    // Make crypto selection in home view
+  function handleOnPress(selection) {
+    // OnPress sends the selected crypto here, and jumpTo switches focus to HomeScreen and sends the selected crypto
+    const jumpToHome = TabActions.jumpTo('Home', { crypto: selection });
+    navigation.dispatch(jumpToHome);
   }
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={onPress} style={style.slotContainer}>
-        <Text style={style.text}>#{item.market_cap_rank} {item.name}</Text>
-        <Text style={{ paddingBottom: 10 }}>
-          <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
+    <TouchableOpacity onPress={() => {
+      handleOnPress(item);
+    }}
+      style={style.slotContainer}>
+      <Text style={style.text}>#{item.market_cap_rank} {item.name}</Text>
+      <Text style={{ paddingBottom: 10 }}>
+        <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
         <Image
           style={{ width: 30, height: 30 }}
           source={{ uri: item.image }}
@@ -73,17 +77,17 @@ export default function MarketScreen() {
       </Text>
       <Text style={style.text}>Price: {item.current_price} €</Text>
       {
-    (item.price_change_percentage_24h >= 0) ? (
-      <Text>
-        <Text style={style.text}>24h:</Text>
-        <Text style={[style.text, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
-      </Text>
-    ) :
-    (<Text>
-      <Text style={style.text}>24h:</Text>
-      <Text style={[style.text, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
-    </Text>)
-  }
+        (item.price_change_percentage_24h >= 0) ? (
+          <Text>
+            <Text style={style.text}>24h:</Text>
+            <Text style={[style.text, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
+          </Text>
+        ) :
+          (<Text>
+            <Text style={style.text}>24h:</Text>
+            <Text style={[style.text, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
+          </Text>)
+      }
     </TouchableOpacity >
   );
 
