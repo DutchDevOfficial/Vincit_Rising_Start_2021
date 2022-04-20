@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Image, ScrollView } from 'react-native';
+import { View, Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { useFocusEffect } from "@react-navigation/native";
 import style from '../style/style';
 
@@ -55,32 +55,46 @@ export default function MarketScreen() {
         }
       )
   }
-  return (
-    <View style={style.containerBackground}>
-      <ScrollView>
-        <Text>Market screen</Text>
 
-        {cryptoList.map((crypto) => (
-          <View style={style.slotContainer}>
-            <Text key={crypto.id}>#{crypto.market_cap_rank} {crypto.name}</Text>
-            <Image
-              style={{
-                width: 30,
-                height: 30,
-                alignSelf: 'center'
-              }}
-              source={{
-                uri: crypto.image,
-              }}
-            />
-            <Text
-              style={{
-                alignSelf: 'center',
-                paddingBottom: 10
-              }}>{crypto.current_price}</Text>
-          </View>
-        ))}
-      </ScrollView>
-    </View>
+  function onPress() {
+    return;
+    // Make crypto selection in home view
+  }
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity onPress={onPress} style={style.slotContainer}>
+        <Text style={style.text}>#{item.market_cap_rank} {item.name}</Text>
+        <Text style={{ paddingBottom: 10 }}>
+          <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
+        <Image
+          style={{ width: 30, height: 30 }}
+          source={{ uri: item.image }}
+        />
+      </Text>
+      <Text style={style.text}>Price: {item.current_price} €</Text>
+      {
+    (item.price_change_percentage_24h >= 0) ? (
+      <Text>
+        <Text style={style.text}>24h:</Text>
+        <Text style={[style.text, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
+      </Text>
+    ) :
+    (<Text>
+      <Text style={style.text}>24h:</Text>
+      <Text style={[style.text, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
+    </Text>)
+  }
+    </TouchableOpacity >
+  );
+
+  return (
+    <SafeAreaView style={style.containerBackground}>
+      <Text style={{ alignSelf: 'center', color: '#fff', fontSize: 17 }}>Cryptocurrency market</Text>
+      <FlatList
+        data={cryptoList}
+        renderItem={renderItem}
+        keyExtractor={crypto => crypto.id}
+      />
+    </SafeAreaView>
   );
 }

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { Dimensions } from 'react-native';
+import { Dimensions, StatusBar } from 'react-native';
 
 const config = {
   deviceWidth: Dimensions.get('window').width,
@@ -22,6 +22,7 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#35393C',
     //backgroundColor: 'white',
+    marginTop: StatusBar.currentHeight
   },
   slotContainer: {
     backgroundColor: '#fc8717',
