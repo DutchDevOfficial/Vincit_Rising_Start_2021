@@ -63,11 +63,12 @@ export default function HomeScreen({ route }) {
         <CurrencyPicker getCurrency={getCurrency} />
         <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
         <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} setDate={setDate} setDate2={setDate2} date={date} date2={date2}/>
+        
+        <Carousel parentData={parentData} currency={currency} API={API} date={date} date2={date2}
+        childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3}/>
         {showChart ? (
           <ChartComponent parentData={parentData} currency={currency} crypto={crypto} parentData2={parentData2} parentData3={parentData3} />
         ) : null}
-        <Carousel parentData={parentData} currency={currency} API={API} date={date} date2={date2}
-        childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3}/>
         <View style={style.container}>
           <TouchableOpacity style={style.button} onPress={() => {
             setShowChart(!showChart);
