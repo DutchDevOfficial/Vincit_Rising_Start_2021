@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { TabActions, useFocusEffect } from "@react-navigation/native";
 import style from '../style/style';
 
@@ -68,13 +68,11 @@ export default function MarketScreen({ navigation }) {
     }}
       style={style.slotContainer}>
       <Text style={style.text}>#{item.market_cap_rank} {item.name}</Text>
-      <Text style={{ paddingBottom: 10 }}>
-        <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
-        <Image
-          style={{ width: 30, height: 30 }}
-          source={{ uri: item.image }}
-        />
-      </Text>
+      <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
+      <Image
+        style={{ width: 30, height: 30 }}
+        source={{ uri: item.image }}
+      />
       <Text style={style.text}>Price: {item.current_price} €</Text>
       {
         (item.price_change_percentage_24h >= 0) ? (
@@ -91,14 +89,45 @@ export default function MarketScreen({ navigation }) {
     </TouchableOpacity >
   );
 
+  const ItemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "100%",
+          backgroundColor: "#fff"
+        }}
+      />
+    );
+  }
+
+  const listHeader = () => {
+    return (
+      <View>
+        <View style={style.testContainer}>
+          <Text style={style.text}>HEADER</Text>
+        </View>
+        <View
+          style={{
+            height: 1,
+            width: "100%",
+            backgroundColor: "#fff"
+          }}
+        />
+      </View>
+    );
+  }
   return (
     <SafeAreaView style={style.containerBackground}>
-      <Text style={{ alignSelf: 'center', color: '#fff', fontSize: 17 }}>Cryptocurrency market</Text>
-      <FlatList
-        data={cryptoList}
-        renderItem={renderItem}
-        keyExtractor={crypto => crypto.id}
-      />
+        <Text style={style.text}>Cryptocurrency market</Text>
+        <FlatList
+          data={cryptoList}
+          renderItem={renderItem}
+          ItemSeparatorComponent={ItemSeparator}
+          ListHeaderComponent={listHeader}
+          stickyHeaderIndices={[0]}
+          keyExtractor={crypto => crypto.id}
+        />
     </SafeAreaView>
   );
 }

@@ -133,5 +133,25 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderRightWidth: 1,
     borderTopWidth: 1,
-  },  
+  },
+  testContainer: {
+    backgroundColor: '#fc8717',
+    // backgroundColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15,
+    paddingBottom: 10,
+    marginHorizontal: 0,
+    padding: 20,
+    shadowOpacity: 0.5,
+    borderRadius: 5,
+    shadowRadius: 10,
+    shadowColor:'#000',
+    shadowOffset:{width:2, height:6},
+    elevation: 5,
+    // background color must be set
+    //backgroundColor : "#0000", // invisible color,
+    backgroundColor : "#4f4f4f",
+    
+  }
 });
