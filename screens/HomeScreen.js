@@ -1,5 +1,5 @@
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from '../components/DatePicker';
 import ChartComponent from '../components/Chart';
 import Header from '../components/Header';
@@ -10,7 +10,8 @@ import CurrencyPicker from '../components/CurrencyPicker';
 import CryptoPicker from '../components/CryptoPicker';
 import Carousel from '../components/Carousel';
 
-export default function App() {
+export default function HomeScreen({ route }) {
+  
   const [currency, setCurrency] = useState("eur");
   const [crypto, setCrypto] = useState("bitcoin");
   const [parentData, setParentData] = useState([]);
@@ -46,6 +47,10 @@ export default function App() {
   const getCrypto = (childData) => {
     setCrypto(childData);
   }
+
+  useEffect(() => {
+    setCrypto(route?.params?.crypto.id);
+  },[route?.params?.crypto])
 
   const [showChart, setShowChart] = useState(false);
   const API = "https://api.coingecko.com/api/v3/coins/" + crypto + "/market_chart/range?vs_currency=" + currency + "&from="
