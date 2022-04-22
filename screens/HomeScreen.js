@@ -8,6 +8,7 @@ import style from '../style/style';
 import MaximizeProfit from '../components/MaximizeProfit';
 import CurrencyPicker from '../components/CurrencyPicker';
 import CryptoPicker from '../components/CryptoPicker';
+import Carousel from '../components/Carousel';
 
 export default function HomeScreen({ route }) {
   
@@ -18,6 +19,10 @@ export default function HomeScreen({ route }) {
   const [parentData3, setParentData3] = useState([]);
   //const [isDisabled, SetIsDisabled] = useState(true);
   const [buttonText, setButtonText] = useState("Show price chart");
+
+
+  const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
+  const [date2, setDate2] = useState(new Date());
 
   const childToParent = (childData) => {
     // if (childData.length > 4 ) {
@@ -57,7 +62,10 @@ export default function HomeScreen({ route }) {
         <Header />
         <CurrencyPicker getCurrency={getCurrency} />
         <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
-        <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} />
+        <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} setDate={setDate} setDate2={setDate2} date={date} date2={date2}/>
+        
+        <Carousel parentData={parentData} currency={currency} API={API} date={date} date2={date2}
+        childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3}/>
         {showChart ? (
           <ChartComponent parentData={parentData} currency={currency} crypto={crypto} parentData2={parentData2} parentData3={parentData3} />
         ) : null}
@@ -72,7 +80,7 @@ export default function HomeScreen({ route }) {
             </Text>
           </TouchableOpacity>
         </View>
-        <MaximizeProfit parentData={parentData} currency={currency} />
+        
         <Footer />
       </ScrollView>
     </View>

@@ -1,3 +1,4 @@
+import { faWheatAwnCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { StyleSheet } from 'react-native';
 import { Dimensions, StatusBar } from 'react-native';
 
@@ -133,6 +134,7 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderRightWidth: 1,
     borderTopWidth: 1,
+<<<<<<< HEAD
   },
   testContainer: {
     backgroundColor: '#fc8717',
@@ -153,5 +155,26 @@ export default StyleSheet.create({
     //backgroundColor : "#0000", // invisible color,
     backgroundColor : "#4f4f4f",
     
+=======
+  },  
+  carousel:{
+  },
+  carouselItem:{
+    width: 289,
+    color: "white",
+    padding: 0,
+    margin: 0,
+  },
+  bullets: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    paddingHorizontal: 10,
+    paddingTop: 5,
+  },
+  bullet: {
+    paddingHorizontal: 5,
+    fontSize: 20,
+>>>>>>> 2dc9e6775baeebc9800552dad3e4836903df6f69
   }
 });
