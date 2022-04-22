@@ -134,19 +134,18 @@ export default StyleSheet.create({
     borderBottomWidth: 1,
     borderRightWidth: 1,
     borderTopWidth: 1,
-<<<<<<< HEAD
   },
-  testContainer: {
+  headerMarket: {
     backgroundColor: '#fc8717',
     // backgroundColor: 'grey',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 15,
     paddingBottom: 10,
     marginHorizontal: 0,
     padding: 20,
     shadowOpacity: 0.5,
-    borderRadius: 5,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
     shadowRadius: 10,
     shadowColor:'#000',
     shadowOffset:{width:2, height:6},
@@ -155,7 +154,6 @@ export default StyleSheet.create({
     //backgroundColor : "#0000", // invisible color,
     backgroundColor : "#4f4f4f",
     
-=======
   },  
   carousel:{
   },
@@ -175,6 +173,5 @@ export default StyleSheet.create({
   bullet: {
     paddingHorizontal: 5,
     fontSize: 20,
->>>>>>> 2dc9e6775baeebc9800552dad3e4836903df6f69
   }
 });

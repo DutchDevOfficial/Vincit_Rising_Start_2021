@@ -70,7 +70,7 @@ export default function MarketScreen({ navigation }) {
       <Text style={style.text}>#{item.market_cap_rank} {item.name}</Text>
       <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
       <Image
-        style={{ width: 30, height: 30 }}
+        style={{ resizeMode: "contain", height: 40, width: 40, }}
         source={{ uri: item.image }}
       />
       <Text style={style.text}>Price: {item.current_price} €</Text>
@@ -95,7 +95,7 @@ export default function MarketScreen({ navigation }) {
         style={{
           height: 1,
           width: "100%",
-          backgroundColor: "#fff"
+          backgroundColor: "#000"
         }}
       />
     );
@@ -104,14 +104,14 @@ export default function MarketScreen({ navigation }) {
   const listHeader = () => {
     return (
       <View>
-        <View style={style.testContainer}>
+        <View style={style.headerMarket}>
           <Text style={style.text}>HEADER</Text>
         </View>
         <View
           style={{
             height: 1,
             width: "100%",
-            backgroundColor: "#fff"
+            backgroundColor: "#000"
           }}
         />
       </View>
@@ -120,14 +120,14 @@ export default function MarketScreen({ navigation }) {
   return (
     <SafeAreaView style={style.containerBackground}>
         <Text style={style.text}>Cryptocurrency market</Text>
-        <FlatList
-          data={cryptoList}
-          renderItem={renderItem}
-          ItemSeparatorComponent={ItemSeparator}
-          ListHeaderComponent={listHeader}
-          stickyHeaderIndices={[0]}
-          keyExtractor={crypto => crypto.id}
-        />
+          <FlatList
+            data={cryptoList}
+            renderItem={renderItem}
+            ItemSeparatorComponent={ItemSeparator}
+            ListHeaderComponent={listHeader}
+            stickyHeaderIndices={[0]}
+            keyExtractor={crypto => crypto.id}
+          />
     </SafeAreaView>
   );
 }

@@ -69,7 +69,7 @@ export default function Chart({ parentData, currency, crypto, parentData2, paren
           labels: dates,
           datasets: [{ data: prices }]
         }}
-        width={Dimensions.get("window").width} // from react-native
+        width={Dimensions.get("window").width * 0.9} // from react-native
         height={220}
         yAxisLabel={_currency}
         yAxisSuffix=""
@@ -92,7 +92,7 @@ export default function Chart({ parentData, currency, crypto, parentData2, paren
         }}
         style={{
           marginVertical: 10,
-          borderRadius: 16
+          borderRadius: 5
         }}
       />
     </View>
