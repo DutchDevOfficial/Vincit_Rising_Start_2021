@@ -8,6 +8,7 @@ import style from '../style/style';
 import MaximizeProfit from '../components/MaximizeProfit';
 import CurrencyPicker from '../components/CurrencyPicker';
 import CryptoPicker from '../components/CryptoPicker';
+import Carousel from '../components/Carousel';
 
 export default function App() {
   const [currency, setCurrency] = useState("eur");
@@ -17,6 +18,10 @@ export default function App() {
   const [parentData3, setParentData3] = useState([]);
   //const [isDisabled, SetIsDisabled] = useState(true);
   const [buttonText, setButtonText] = useState("Show price chart");
+
+
+  const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
+  const [date2, setDate2] = useState(new Date());
 
   const childToParent = (childData) => {
     // if (childData.length > 4 ) {
@@ -52,10 +57,12 @@ export default function App() {
         <Header />
         <CurrencyPicker getCurrency={getCurrency} />
         <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
-        <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} />
+        <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} setDate={setDate} setDate2={setDate2} date={date} date2={date2}/>
         {showChart ? (
           <ChartComponent parentData={parentData} currency={currency} crypto={crypto} parentData2={parentData2} parentData3={parentData3} />
         ) : null}
+        <Carousel parentData={parentData} currency={currency} API={API} date={date} date2={date2}
+        childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3}/>
         <View style={style.container}>
           <TouchableOpacity style={style.button} onPress={() => {
             setShowChart(!showChart);
@@ -67,7 +74,7 @@ export default function App() {
             </Text>
           </TouchableOpacity>
         </View>
-        <MaximizeProfit parentData={parentData} currency={currency} />
+        
         <Footer />
       </ScrollView>
     </View>
