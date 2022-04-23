@@ -159,11 +159,9 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         }
     }
 
-
-
     const getInterval = (offset) => {
         for (let i = 1; i <= 3; i++) {
-            if (offset + 1 < (150) * i) {
+            if (offset + 1 < (170) * i) {
                 return i;
             }
             if (i == 3) {
@@ -195,32 +193,34 @@ export default function Carousel({ parentData, currency, date, date2, API, child
 
 
     return (
-        <View style={[style.slotContainer, style.carousel]}>
+        <View style={[style.slotContainer]}>
 
 
 
 
-<View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-        <View>
-          <Text style={{width: 130, textAlign: 'center',color: '#fff',fontSize: 17, }}>Calculations</Text>
-        </View>
-        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-      </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
+                <View>
+                    <Text style={{ width: 130, textAlign: 'center', color: '#fff', fontSize: 17, }}>Calculations</Text>
+                </View>
+                <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
+            </View>
 
 
-            <ScrollView style={style.scrollView}
+            <ScrollView
+                style={style.carousel}
                 horizontal={true}
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 onScroll={data => {
                     setInterval(getInterval(data.nativeEvent.contentOffset.x));
                 }}
-            >
-                <Text style={style.carouselItem}>{text}</Text>
-                <Text style={style.carouselItem}>{text2}</Text>
-                <Text style={style.carouselItem}>{text3}</Text>
+                contentContainerStyle={{ width: `${300}%` }}>
+                <Text style={style.carouselItem} >{text}</Text>
+                <Text style={style.carouselItem} >{text2}</Text>
+                <Text style={style.carouselItem} >{text3}</Text>
             </ScrollView>
+
             <View style={style.bullets}>
                 {bullets}
             </View>
