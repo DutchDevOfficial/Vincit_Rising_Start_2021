@@ -11,6 +11,7 @@
   },
   "dependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-native-fontawesome": "^0.2.7",
@@ -21,15 +22,27 @@
     "expo": "~44.0.0",
     "expo-font": "~10.0.4",
 =======
+=======
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-native-fontawesome": "^0.2.7",
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
     "@react-native-community/datetimepicker": "4.0.0",
     "@react-native-picker/picker": "2.2.1",
+    "@react-navigation/bottom-tabs": "^6.3.1",
+    "@react-navigation/native": "^6.0.10",
     "expo": "~44.0.0",
+<<<<<<< HEAD
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+    "expo-font": "~10.0.4",
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-chart-kit": "^6.12.0",
+<<<<<<< HEAD
 <<<<<<< HEAD
     "react-native-gesture-handler": "~2.1.0",
     "react-native-responsive-linechart": "^5.7.1",
@@ -42,6 +55,12 @@
     "react-native-gesture-handler": "~2.1.0",
     "expo-font": "~10.0.4"
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+    "react-native-gesture-handler": "~2.1.0",
+    "react-native-responsive-linechart": "^5.7.1",
+    "react-native-svg": "12.1.1",
+    "react-native-web": "0.17.1"
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

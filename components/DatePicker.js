@@ -3,6 +3,7 @@ import React, { useState, useEffect, useLayoutEffect } from "react";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import style from '../style/style';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faCalendarDay  } from '@fortawesome/free-solid-svg-icons/faCalendarDay';
 import { TouchableOpacity } from 'react-native';
@@ -17,17 +18,22 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
   
   const [show2, setShow2] = useState(false);
 =======
+=======
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faCalendarDay  } from '@fortawesome/free-solid-svg-icons/faCalendarDay';
+import { TouchableOpacity } from 'react-native';
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 
 
-export default function DatePicker({ childToParent, childToParent2,childToParent3, API }) {
+export default function DatePicker({ childToParent, childToParent2,childToParent3, API, setDate, setDate2, date, date2 }) {
 
   
-  const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
+  
   const [show, setShow] = useState(false);
 
-  const [date2, setDate2] = useState(new Date());
-  const [datetoday, setDatetoday] = useState(new Date());
+  
   const [show2, setShow2] = useState(false);
+<<<<<<< HEAD
   const [text, setText] = useState('');
   const [text2, setText2] = useState('');
   const [text3, setText3] = useState('');
@@ -39,6 +45,8 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
   const [end, setEnd] = useState([]);
 
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 
   const onChange = (event, selectedDate) => {
 
@@ -64,6 +72,7 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
     setShow2(prevShow2 => !prevShow2);
   }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
   useEffect(() => {
@@ -208,20 +217,27 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
     setText("Longest downward trend is: " + longestTrend + " days | From: " + firstDay + " to: " + lastDay + " ")
   }
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 
 
 
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <View style={style.slotContainer}>
 =======
     <View style={style.container}>
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+    <View style={style.slotContainer}>
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
       <View>
         <Text style={style.text}>Start date</Text>
         <Pressable
           onPress={toggle}>
+<<<<<<< HEAD
 <<<<<<< HEAD
           <Text style={style.datePicker}>
             {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
@@ -229,6 +245,10 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
           <Text style={style.text}>
             {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+          <Text style={style.datePicker}>
+            {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
           </Text>
         </Pressable>
         {show && Platform.OS === 'ios' && (
@@ -256,12 +276,17 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
         <Pressable
           onPress={toggle2}>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <Text style={style.datePicker}>
             {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
 =======
           <Text style={style.text}>
             {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+          <Text style={style.datePicker}>
+            {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
           </Text>
         </Pressable>
         {show2 && Platform.OS === 'ios' && (
@@ -284,11 +309,14 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
           />
         )}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <Text>{text}</Text>
         <Text>{text2}</Text>
         <Text>{text3}</Text>
 >>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
+=======
+>>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
       </View>
     </View>
   );
