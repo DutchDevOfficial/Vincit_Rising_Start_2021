@@ -17,7 +17,7 @@ export default StyleSheet.create({
     //I hope these are necessary
     marginRight: config.deviceWidth * 0.1,
     marginLeft: config.deviceWidth * 0.1,
-    
+
   },
   containerBackground: {
     flex: 1,
@@ -38,20 +38,20 @@ export default StyleSheet.create({
     shadowOpacity: 0.5,
     borderRadius: 5,
     shadowRadius: 10,
-    shadowColor:'#000',
-    shadowOffset:{width:2, height:6},
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 6 },
     elevation: 5,
     // background color must be set
     //backgroundColor : "#0000", // invisible color,
-    backgroundColor : "#4f4f4f",
-    
-  },  
+    backgroundColor: "#4f4f4f",
+
+  },
   text: {
     color: '#fff',
     fontSize: 20,
     alignSelf: 'center',
     //fontFamily: 'SansArabicRegular',
-  },  
+  },
   text2: {
     color: '#fff',
     fontSize: 17,
@@ -97,7 +97,7 @@ export default StyleSheet.create({
     marginTop: 15,
   },
   buttonText: {
-    color:"#F0FFFF",
+    color: "#F0FFFF",
     fontSize: 20,
   },
   appButtonContainer: {
@@ -116,7 +116,7 @@ export default StyleSheet.create({
     padding: 5,
     fontSize: 15,
     textAlign: 'left',
-    display: 'flex', 
+    display: 'flex',
     backgroundColor: '#fff'
   },
   datePicker: {
@@ -137,27 +137,47 @@ export default StyleSheet.create({
   },
   headerMarket: {
     backgroundColor: '#fc8717',
-    // backgroundColor: 'grey',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 10,
-    marginHorizontal: 0,
-    padding: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
     shadowOpacity: 0.5,
-    borderTopRightRadius: 5,
-    borderTopLeftRadius: 5,
+    borderRadius: 5,
     shadowRadius: 10,
-    shadowColor:'#000',
-    shadowOffset:{width:2, height:6},
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 6 },
     elevation: 5,
     // background color must be set
     //backgroundColor : "#0000", // invisible color,
-    backgroundColor : "#4f4f4f",
-    
-  },  
-  carousel:{
+    backgroundColor: "#4f4f4f",
   },
-  carouselItem:{
+
+  listMarket: {
+    backgroundColor: '#fc8717',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 2,
+    paddingVertical: 10,
+    paddingHorizontal: 5,
+    shadowOpacity: 0.5,
+    borderRadius: 5,
+    shadowRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 6 },
+    elevation: 5,
+    // background color must be set
+    //backgroundColor : "#0000", // invisible color,
+    backgroundColor: "#4f4f4f",
+  },
+  textMarket: {
+    color: '#fff',
+    fontSize: 15,
+    alignSelf: 'center',
+  },
+
+  carousel: {
+  },
+  carouselItem: {
     width: 289,
     color: "white",
     padding: 0,
