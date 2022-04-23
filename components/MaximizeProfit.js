@@ -35,6 +35,7 @@ export default function MaximizeProfit({ parentData, currency}) {
   }
 
   return (
+<<<<<<< HEAD
     <View style={style.slotContainer}>
       
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -47,6 +48,11 @@ export default function MaximizeProfit({ parentData, currency}) {
 
       {/* <Text style={style.text}>Maximize Profit</Text> */}
       <Text style={style.text2}>{text}</Text>
+=======
+    <View style={style.container}>
+      <Text style={style.text2}>Maximize Profit</Text>
+      <Text>{text}</Text>
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
     </View>
   )
 }

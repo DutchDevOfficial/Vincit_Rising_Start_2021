@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { faWheatAwnCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { StyleSheet } from 'react-native';
 import { Dimensions, StatusBar } from 'react-native';
@@ -6,6 +7,9 @@ const config = {
   deviceWidth: Dimensions.get('window').width,
   deviceHeight: Dimensions.get('window').height
 }
+=======
+import { StyleSheet } from 'react-native';
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
 
 export default StyleSheet.create({
   container: {
@@ -13,16 +17,20 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,
+<<<<<<< HEAD
 
     //I hope these are necessary
     marginRight: config.deviceWidth * 0.1,
     marginLeft: config.deviceWidth * 0.1,
     
+=======
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
   },
   containerBackground: {
     flex: 1,
     backgroundColor: '#35393C',
     //backgroundColor: 'white',
+<<<<<<< HEAD
     marginTop: StatusBar.currentHeight
   },
   slotContainer: {
@@ -50,12 +58,21 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 20,
     alignSelf: 'center',
+=======
+  },
+  text: {
+    color: '#fff',
+    fontSize: 20,
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
     //fontFamily: 'SansArabicRegular',
   },  
   text2: {
     color: '#fff',
     fontSize: 17,
+<<<<<<< HEAD
     marginTop: 5,
+=======
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
   },
   header: {
     marginTop: 30,
@@ -88,6 +105,7 @@ export default StyleSheet.create({
     //margin: 30,
     flexDirection: "row",
     padding: 5,
+<<<<<<< HEAD
     backgroundColor: '#707070',
     //backgroundColor: "#f36f57",
     width: 250,
@@ -95,6 +113,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 15,
+=======
+    backgroundColor: "#f36f57",
+    width: 150,
+    borderRadius: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
   },
   buttonText: {
     color:"#F0FFFF",
@@ -119,6 +144,7 @@ export default StyleSheet.create({
     display: 'flex', 
     backgroundColor: '#fff'
   },
+<<<<<<< HEAD
   datePicker: {
     color: 'black',
     fontSize: 20,
@@ -174,4 +200,6 @@ export default StyleSheet.create({
     paddingHorizontal: 5,
     fontSize: 20,
   }
+=======
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
 });

@@ -23,7 +23,11 @@ export default function Header() {
         <View
             style={{
                 width: '100%',
+<<<<<<< HEAD
                 height: 100,
+=======
+                height: 150,
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
                 shadowOpacity: 0.5,
                 shadowRadius: 11,
                 shadowColor:'#000',
@@ -36,9 +40,12 @@ export default function Header() {
                 style={{
                     flex: 1,
                     alignItems: 'center',
+<<<<<<< HEAD
                     opacity: 0.8,
                     borderBottomColor: 'white',
                     borderBottomWidth: 1,
+=======
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
                 }}
             >
                 <Text style={styles.heading}>Vincit Crypto</Text>
@@ -51,12 +58,21 @@ const styles = StyleSheet.create({
     heading: {
       fontFamily: 'RobotoCondensed',
       color: '#fff',
+<<<<<<< HEAD
     //   fontWeight: 'bold',
       flex: 1,
       fontSize: 50,
       textAlign: 'center',
       margin: 10,
       marginTop: 15,
+=======
+      fontWeight: 'bold',
+      flex: 1,
+      fontSize: 45,
+      textAlign: 'center',
+      margin: 10,
+      marginTop: 45,
+>>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
     },
     shadow: {
         shadowOpacity: 0.5,
