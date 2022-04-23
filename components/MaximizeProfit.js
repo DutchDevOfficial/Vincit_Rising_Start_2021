@@ -48,6 +48,5 @@ export default function MaximizeProfit({ parentData, currency}) {
       {/* <Text style={style.text}>Maximize Profit</Text> */}
       <Text style={style.text2}>{text}</Text>
     </View>
-
   )
 }

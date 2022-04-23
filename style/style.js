@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 import { faWheatAwnCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { StyleSheet } from 'react-native';
 import { Dimensions, StatusBar } from 'react-native';
@@ -10,12 +6,6 @@ const config = {
   deviceWidth: Dimensions.get('window').width,
   deviceHeight: Dimensions.get('window').height
 }
-<<<<<<< HEAD
-=======
-import { StyleSheet } from 'react-native';
->>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
-=======
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 
 export default StyleSheet.create({
   container: {
@@ -23,27 +13,16 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 15,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 
     //I hope these are necessary
     marginRight: config.deviceWidth * 0.1,
     marginLeft: config.deviceWidth * 0.1,
     
-<<<<<<< HEAD
-=======
->>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
-=======
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
   },
   containerBackground: {
     flex: 1,
     backgroundColor: '#35393C',
     //backgroundColor: 'white',
-<<<<<<< HEAD
-<<<<<<< HEAD
     marginTop: StatusBar.currentHeight
   },
   slotContainer: {
@@ -71,53 +50,12 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 20,
     alignSelf: 'center',
-=======
-=======
-    marginTop: StatusBar.currentHeight
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
-  },
-  slotContainer: {
-    backgroundColor: '#fc8717',
-    // backgroundColor: 'grey',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 15,
-    paddingBottom: 10,
-    marginRight: config.deviceWidth * 0.1,
-    marginLeft: config.deviceWidth * 0.1,
-    padding: 20,
-    shadowOpacity: 0.5,
-    borderRadius: 5,
-    shadowRadius: 10,
-    shadowColor:'#000',
-    shadowOffset:{width:2, height:6},
-    elevation: 5,
-    // background color must be set
-    //backgroundColor : "#0000", // invisible color,
-    backgroundColor : "#4f4f4f",
-    
-  },  
-  text: {
-    color: '#fff',
-    fontSize: 20,
-<<<<<<< HEAD
->>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
-=======
-    alignSelf: 'center',
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
     //fontFamily: 'SansArabicRegular',
   },  
   text2: {
     color: '#fff',
     fontSize: 17,
-<<<<<<< HEAD
-<<<<<<< HEAD
     marginTop: 5,
-=======
->>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
-=======
-    marginTop: 5,
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
   },
   header: {
     marginTop: 30,
@@ -150,8 +88,6 @@ export default StyleSheet.create({
     //margin: 30,
     flexDirection: "row",
     padding: 5,
-<<<<<<< HEAD
-<<<<<<< HEAD
     backgroundColor: '#707070',
     //backgroundColor: "#f36f57",
     width: 250,
@@ -159,22 +95,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 15,
-=======
-    backgroundColor: "#f36f57",
-    width: 150,
-    borderRadius: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
->>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
-=======
-    backgroundColor: '#707070',
-    //backgroundColor: "#f36f57",
-    width: 250,
-    borderRadius: 3,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 15,
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
   },
   buttonText: {
     color:"#F0FFFF",
@@ -199,10 +119,6 @@ export default StyleSheet.create({
     display: 'flex', 
     backgroundColor: '#fff'
   },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
   datePicker: {
     color: 'black',
     fontSize: 20,
@@ -258,9 +174,4 @@ export default StyleSheet.create({
     paddingHorizontal: 5,
     fontSize: 20,
   }
-<<<<<<< HEAD
-=======
->>>>>>> e52cdbb45e29bc541ccd7929efbfd828c3b7e5d1
-=======
->>>>>>> de6588128f86d312d099d6100cff2faa6b9237be
 });
