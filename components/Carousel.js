@@ -22,9 +22,10 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         }
     }, [API]);
 
-    console.log(date, date2)
+    
 
     function FetchData() {
+       
         let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
         const unixStartDate = (new Date(Date.UTC(_startDate.getFullYear(), _startDate.getMonth(), _startDate.getDate())).getTime()) / 1000
         let _endDate = new Date(date2)
@@ -34,7 +35,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
 
         let _todayDate = new Date(datetoday)
         const unixTodayDate = (new Date(Date.UTC(_todayDate.getFullYear(), _todayDate.getMonth(), _todayDate.getDate())).getTime()) / 1000
-
+        
 
         if (unixStartDate > unixEndDate) {
             alert('Start date must be earlier than end date')
@@ -49,7 +50,6 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             alert('Selected dates cant be from the future')
             return
         }
-
         fetch(API + unixStartDate + "&to=" + unixEndDate)
             .then(res => res.json())
             .then(
@@ -81,7 +81,8 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     childToParent3(_prices3)
                     GetDownwardTrend(_prices)
                     GetHighestVolume(_totalVolume)
-                    maxProfit(_prices)
+                    
+                    
                 },
                 (error) => {
                     alert("Error!")
@@ -189,7 +190,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
     }
 
     useEffect(() => {
-        console.log(interval)
+        //console.log(interval)
     }, [interval])
 
 
