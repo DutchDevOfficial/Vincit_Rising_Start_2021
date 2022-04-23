@@ -8,7 +8,6 @@ export default function Carousel({ parentData, currency, date, date2, API, child
     const [text3, setText3] = useState("");
     const [datetoday, setDatetoday] = useState(new Date());
 
-
     useEffect(() => {
         FetchData()
     }, [date, date2])
@@ -22,7 +21,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         }
     }, [API]);
 
-    console.log(date, date2)
+    
 
     function FetchData() {
         let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
@@ -34,7 +33,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
 
         let _todayDate = new Date(datetoday)
         const unixTodayDate = (new Date(Date.UTC(_todayDate.getFullYear(), _todayDate.getMonth(), _todayDate.getDate())).getTime()) / 1000
-
+        
 
         if (unixStartDate > unixEndDate) {
             alert('Start date must be earlier than end date')
@@ -79,16 +78,21 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
                     childToParent2(dayRange)
                     childToParent3(_prices3)
-                    GetDownwardTrend(_prices)
-                    GetHighestVolume(_totalVolume)
-                    maxProfit(_prices)
+                    GetHighestVolume(_totalVolume, dayRange)
+                    GetDownwardTrend(_prices, dayRange)
+                    Calculate(dayRange)
+                    
                 },
                 (error) => {
                     alert("Error!")
                 }
             )
     }
-    function GetHighestVolume(_totalVolume, _prices) {
+    function GetHighestVolume(_totalVolume, dayRange) {
+        if (dayRange === 1){
+            setText2("There must be more than 1 day between given dates for the calculations to work properly")
+            return
+        }
         let max = 0;
         let maxIndex = 0;
 
@@ -100,11 +104,17 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         }
         let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0, -12)
         setText2("The highest trading volume was " + _totalVolume[maxIndex][1] + " on " + HighestVolumeDay)
+        
     }
 
 
 
-    function GetDownwardTrend(_prices) {
+    function GetDownwardTrend(_prices, dayRange) {
+        if (dayRange === 1){
+            setText("There must be more than 1 day between given dates for the calculations to work properly")
+            return
+        }
+        
         let longestTrend = 1;
         let longestTrendIndex = 0; //index is reversed => get start index by substracting longest trend
         let currentTrend = 0;
@@ -130,15 +140,21 @@ export default function Carousel({ parentData, currency, date, date2, API, child
     }
 
 
-    useEffect(() => {
-        Calculate();
-    }, [parentData]);
+ 
 
-    function Calculate() {
+    function Calculate(dayRange) {
+       
         if (parentData.length === 0 || parentData === "undefined") {
             return null;
         } else {
+            if (dayRange === 1){
+                setText3("There must be more than 1 day between given dates for the calculations to work properly")
+                return
+            }
+           
+            
             let prices = Array.from(parentData);
+            
             let maxProfit = 0;
             let min = prices[0][1];
             let minIndex = 0;
@@ -187,7 +203,6 @@ export default function Carousel({ parentData, currency, date, date2, API, child
     }
 
     useEffect(() => {
-        console.log(interval)
     }, [interval])
 
 
