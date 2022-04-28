@@ -176,7 +176,6 @@ export default StyleSheet.create({
 
   carouselItem: {
     width: "30%",
-    color: "white",
     padding: 10  ,
     marginVertical: 10,
     marginHorizontal: 15,
