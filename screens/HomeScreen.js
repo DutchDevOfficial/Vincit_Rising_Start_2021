@@ -49,7 +49,9 @@ export default function HomeScreen({ route }) {
   }
 
   useEffect(() => {
+    if(route?.params?.crypto.id!=undefined){
     setCrypto(route?.params?.crypto.id);
+    }
   },[route?.params?.crypto])
 
   const [showChart, setShowChart] = useState(false);

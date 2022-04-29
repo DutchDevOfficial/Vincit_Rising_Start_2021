@@ -52,7 +52,6 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result)
                     let _prices = new Array
                     let _prices2 = new Array
                     let _prices3 = new Array
@@ -78,16 +77,22 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     childToParent(_prices2)  //had to make a new prices array because _prices sometimes misses a value. I think due to being cut in some function, before it sents to chart.js .
                     childToParent2(dayRange)
                     childToParent3(_prices3)
-                    GetDownwardTrend(_prices)
-                    GetHighestVolume(_totalVolume)
-                    maxProfit(_prices)
+                    GetHighestVolume(_totalVolume, dayRange)
+                    GetDownwardTrend(_prices, dayRange)
+                    Calculate(dayRange)
+                    
+                   
                 },
                 (error) => {
                     alert("Error!")
                 }
             )
     }
-    function GetHighestVolume(_totalVolume, _prices) {
+    function GetHighestVolume(_totalVolume, dayRange) {
+        if (dayRange === 1){
+            setText2("There must be more than 1 day between given dates for the calculations to work properly")
+            return
+        }
         let max = 0;
         let maxIndex = 0;
 
@@ -103,7 +108,11 @@ export default function Carousel({ parentData, currency, date, date2, API, child
 
 
 
-    function GetDownwardTrend(_prices) {
+    function GetDownwardTrend(_prices,dayRange) {
+        if (dayRange === 1){
+            setText("There must be more than 1 day between given dates for the calculations to work properly")
+            return
+        }
         let longestTrend = 1;
         let longestTrendIndex = 0; //index is reversed => get start index by substracting longest trend
         let currentTrend = 0;
@@ -129,14 +138,14 @@ export default function Carousel({ parentData, currency, date, date2, API, child
     }
 
 
-    useEffect(() => {
-        Calculate();
-    }, [parentData]);
-
-    function Calculate() {
+    function Calculate(dayRange) {
         if (parentData.length === 0 || parentData === "undefined") {
             return null;
         } else {
+            if (dayRange === 1){
+                setText3("There must be more than 1 day between given dates for the calculations to work properly")
+                return
+            }
             let prices = Array.from(parentData);
             let maxProfit = 0;
             let min = prices[0][1];
@@ -158,11 +167,9 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         }
     }
 
-
-
     const getInterval = (offset) => {
         for (let i = 1; i <= 3; i++) {
-            if (offset + 1 < (150) * i) {
+            if (offset + 1 < (170) * i) {
                 return i;
             }
             if (i == 3) {
@@ -187,7 +194,11 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         );
     }
     return (
-        <View style={[style.slotContainer, style.carousel]}>
+        <View style={[style.slotContainer]}>
+
+
+
+
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
                 <View>
@@ -195,18 +206,22 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                 </View>
                 <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
             </View>
-            <ScrollView style={style.scrollView}
+
+
+            <ScrollView
+                style={style.carousel}
                 horizontal={true}
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
                 onScroll={data => {
                     setInterval(getInterval(data.nativeEvent.contentOffset.x));
                 }}
-            >
-                <Text style={style.carouselItem}>{text}</Text>
-                <Text style={style.carouselItem}>{text2}</Text>
-                <Text style={style.carouselItem}>{text3}</Text>
+                contentContainerStyle={{ width: `${300}%` }}>
+                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Downward Trend</Text><Text style={{color: "white"}}>{text}</Text></View>
+                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Highest trading volume</Text><Text style={{color: "white"}}>{text2}</Text></View>
+                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Maximize profits</Text><Text style={{color: "white"}}>{text3}</Text></View>
             </ScrollView>
+
             <View style={style.bullets}>
                 {bullets}
             </View>

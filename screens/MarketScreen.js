@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, Image, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import { TabActions, useFocusEffect } from "@react-navigation/native";
 import style from '../style/style';
 
@@ -34,7 +34,7 @@ export default function MarketScreen({ navigation }) {
       "roi": null,
       "last_updated": "2022-04-19T22:39:02.744Z"
     }]);
-  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency + "&order=market_cap_desc&per_page=10"
+  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency + "&order=market_cap_desc&per_page=20"
 
   useFocusEffect(
     React.useCallback(() => {
@@ -66,37 +66,50 @@ export default function MarketScreen({ navigation }) {
     <TouchableOpacity onPress={() => {
       handleOnPress(item);
     }}
-      style={style.slotContainer}>
-      <Text style={style.text}>#{item.market_cap_rank} {item.name}</Text>
-      <Text style={{ paddingBottom: 10 }}>
-        <Text style={style.text}>{item.symbol.toUpperCase()}</Text>
-        <Image
-          style={{ width: 30, height: 30 }}
-          source={{ uri: item.image }}
-        />
-      </Text>
-      <Text style={style.text}>Price: {item.current_price} €</Text>
+      style={style.listMarket}>
+      <Text style={[style.textMarket, { paddingRight: 10 }]}>#{item.market_cap_rank} {item.name}</Text>
+      <Image
+        style={{ resizeMode: "contain", height: 40, width: 40, }}
+        source={{ uri: item.image }}
+      />
+      <Text style={[style.textMarket, { paddingLeft: 20 }]}>{item.symbol.toUpperCase()}</Text>
+      <Text style={[style.textMarket, { paddingLeft: 20 }]}>{item.current_price} €</Text>
       {
         (item.price_change_percentage_24h >= 0) ? (
-          <Text>
-            <Text style={style.text}>24h:</Text>
-            <Text style={[style.text, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
-          </Text>
-        ) :
-          (<Text>
-            <Text style={style.text}>24h:</Text>
-            <Text style={[style.text, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
-          </Text>)
+          <Text style={[style.textMarket, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
+        ) : (
+          <Text style={[style.textMarket, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
+        )
       }
     </TouchableOpacity >
   );
 
+  const listHeader = () => {
+    return (
+      <View>
+        <View style={style.headerMarket}>
+          <Text style={style.textMarket}>Market cap</Text>
+          <Text style={[style.textMarket, { marginLeft: 70 }]}>Price</Text>
+          <Text style={[style.textMarket, { marginLeft: 70 }]}>24h:</Text>
+        </View>
+        <View
+          style={{
+            height: 1,
+            width: "100%",
+            backgroundColor: "#000"
+          }}
+        />
+      </View>
+    );
+  }
+
   return (
     <SafeAreaView style={style.containerBackground}>
-      <Text style={{ alignSelf: 'center', color: '#fff', fontSize: 17 }}>Cryptocurrency market</Text>
       <FlatList
         data={cryptoList}
         renderItem={renderItem}
+        ListHeaderComponent={listHeader}
+        stickyHeaderIndices={[0]}
         keyExtractor={crypto => crypto.id}
       />
     </SafeAreaView>
