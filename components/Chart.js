@@ -52,10 +52,14 @@ export default function Chart({ parentData, currency, crypto, parentData2, paren
       default:
         break;
     }
-    if (parentData[0][1] > 100) {
-      set_decimal(0)
-    } else {
-      set_decimal(2)
+    try {
+      if (parentData[0][1] > 100) {
+        set_decimal(0)
+      } else {
+        set_decimal(2)
+      }
+    } catch (error) {
+      console.log(error)
     }
   }, [parentData])
 
