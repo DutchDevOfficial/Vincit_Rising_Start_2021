@@ -5,7 +5,6 @@ import ChartComponent from '../components/Chart';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import style from '../style/style';
-import MaximizeProfit from '../components/MaximizeProfit';
 import CurrencyPicker from '../components/CurrencyPicker';
 import CryptoPicker from '../components/CryptoPicker';
 import Carousel from '../components/Carousel';
