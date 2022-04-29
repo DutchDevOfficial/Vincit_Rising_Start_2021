@@ -2,12 +2,18 @@ import { View, Text, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from '../style/style';
 
-export default function Carousel({ parentData, currency, date, date2, API, childToParent, childToParent2, childToParent3 }) {
+export default function Carousel({crypto, parentData, currency, date, date2, API, childToParent, childToParent2, childToParent3 }) {
     const [text, setText] = useState('Loading...');
     const [text2, setText2] = useState('Loading...');
     const [text3, setText3] = useState("Loading...");
     const [datetoday, setDatetoday] = useState(new Date());
 
+    useEffect(() => {
+      setText("Loading...")
+      setText2("Loading...")
+      setText3("Loading...")
+    }, [date, date2, currency, crypto])
+    
 
     useEffect(() => {
         FetchData()

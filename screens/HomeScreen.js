@@ -71,7 +71,7 @@ export default function HomeScreen({ route }) {
         <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} setDate={setDate} setDate2={setDate2} date={date} date2={date2} />
 
         <Carousel parentData={parentData} currency={currency} API={API} date={date} date2={date2}
-          childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} />
+          childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} crypto={crypto}/>
         {showChart ? (
           <ChartComponent parentData={parentData} currency={currency} crypto={crypto} parentData2={parentData2} parentData3={parentData3} />
         ) : null}
