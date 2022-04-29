@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, Image, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Image, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { TabActions, useFocusEffect } from "@react-navigation/native";
 import style from '../style/style';
 
 export default function MarketScreen({ navigation }) {
-  const [currency, setCurrency] = useState("eur");
+  const [currency, setCurrency] = useState({
+    "name": "EUR",
+    "symbol": "€",
+  });
   const [cryptoList, setCryptoList] = useState([
     {
       "id": "bitcoin",
@@ -34,7 +37,7 @@ export default function MarketScreen({ navigation }) {
       "roi": null,
       "last_updated": "2022-04-19T22:39:02.744Z"
     }]);
-  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency + "&order=market_cap_desc&per_page=20"
+  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=ZAR&order=market_cap_desc&per_page=25"
 
   useFocusEffect(
     React.useCallback(() => {
@@ -62,43 +65,50 @@ export default function MarketScreen({ navigation }) {
     navigation.dispatch(jumpToHome);
   }
 
+  function jumpToCurrency() {
+    const jumpToHome = TabActions.jumpTo('Home');
+    navigation.dispatch(jumpToHome);
+  }
+
   const renderItem = ({ item }) => (
     <TouchableOpacity onPress={() => {
       handleOnPress(item);
     }}
       style={style.listMarket}>
-      <Text style={[style.textMarket, { paddingRight: 10 }]}>#{item.market_cap_rank} {item.name}</Text>
-      <Image
-        style={{ resizeMode: "contain", height: 40, width: 40, }}
-        source={{ uri: item.image }}
-      />
-      <Text style={[style.textMarket, { paddingLeft: 20 }]}>{item.symbol.toUpperCase()}</Text>
-      <Text style={[style.textMarket, { paddingLeft: 20 }]}>{item.current_price} €</Text>
-      {
-        (item.price_change_percentage_24h >= 0) ? (
-          <Text style={[style.textMarket, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
-        ) : (
-          <Text style={[style.textMarket, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
-        )
-      }
+      <Text style={[style.textMarket, style.marketShortColumn]}>{item.market_cap_rank}</Text>
+      <Text style={[style.textMarket, style.marketColumn]}>{item.name}</Text>
+      <View style={style.marketColumn}>
+        <Image
+          style={{ resizeMode: "contain", height: 30, width: 30, }}
+          source={{ uri: item.image }}
+        />
+        <Text style={[style.textMarket]}>{item.symbol.toUpperCase()}</Text>
+      </View>
+      <Text style={[style.textMarket, style.marketLongColumn]}>{currency.symbol}{item.current_price}</Text>
+      <View style={style.marketColumn}>
+        {
+          (item.price_change_percentage_24h >= 0) ? (
+            <Text style={[style.textMarket, { color: "lightgreen" }]}> +{item.price_change_percentage_24h.toFixed(2)}%</Text>
+          ) : (
+            <Text style={[style.textMarket, { color: "red" }]}> {item.price_change_percentage_24h.toFixed(2)}%</Text>
+          )
+        }
+      </View>
     </TouchableOpacity >
   );
 
   const listHeader = () => {
     return (
-      <View>
-        <View style={style.headerMarket}>
-          <Text style={style.textMarket}>Market cap</Text>
-          <Text style={[style.textMarket, { marginLeft: 70 }]}>Price</Text>
-          <Text style={[style.textMarket, { marginLeft: 70 }]}>24h:</Text>
-        </View>
-        <View
-          style={{
-            height: 1,
-            width: "100%",
-            backgroundColor: "#000"
-          }}
-        />
+      <View style={style.headerMarket}>
+        <Text style={[style.textMarket, style.marketShortColumn]}>#</Text>
+        <Text style={[style.textMarket, style.marketColumn]}>Crypto</Text>
+        <Text style={[style.textMarket, style.marketColumn]}></Text>
+        <TouchableOpacity style={style.marketPrice} onPress={() => {
+          jumpToCurrency();
+        }}>
+          <Text style={[style.textMarket, style.marketLongColumn]}>Price({currency.symbol})</Text>
+        </TouchableOpacity>
+        <Text style={[style.textMarket, style.marketColumn]}>24h:</Text>
       </View>
     );
   }
