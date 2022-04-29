@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react'
 import style from '../style/style';
 
 export default function Carousel({ parentData, currency, date, date2, API, childToParent, childToParent2, childToParent3 }) {
-    const [text, setText] = useState('');
-    const [text2, setText2] = useState('');
-    const [text3, setText3] = useState("");
+    const [text, setText] = useState('Loading...');
+    const [text2, setText2] = useState('Loading...');
+    const [text3, setText3] = useState("Loading...");
     const [datetoday, setDatetoday] = useState(new Date());
 
 
@@ -21,8 +21,6 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             FetchData();
         }
     }, [API]);
-
-    console.log(date, date2)
 
     function FetchData() {
         let _startDate = new Date(date) //Had get date in this way, otherwise it gets local time instead of utc±0, meaning the results would be off by a few hours
@@ -54,6 +52,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result)
                     let _prices = new Array
                     let _prices2 = new Array
                     let _prices3 = new Array
@@ -187,28 +186,15 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             </Text>
         );
     }
-
-    useEffect(() => {
-        console.log(interval)
-    }, [interval])
-
-
-
     return (
         <View style={[style.slotContainer, style.carousel]}>
-
-
-
-
-<View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-        <View>
-          <Text style={{width: 130, textAlign: 'center',color: '#fff',fontSize: 17, }}>Calculations</Text>
-        </View>
-        <View style={{flex: 1, height: 1, backgroundColor: 'black'}} />
-      </View>
-
-
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
+                <View>
+                    <Text style={{ width: 130, textAlign: 'center', color: '#fff', fontSize: 17, }}>Calculations</Text>
+                </View>
+                <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
+            </View>
             <ScrollView style={style.scrollView}
                 horizontal={true}
                 pagingEnabled
