@@ -225,9 +225,9 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     setInterval(getInterval(data.nativeEvent.contentOffset.x));
                 }}
                 contentContainerStyle={{ width: `${300}%` }}>
-                <Text style={style.carouselItem} >{text}</Text>
-                <Text style={style.carouselItem} >{text2}</Text>
-                <Text style={style.carouselItem} >{text3}</Text>
+                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Downward Trend</Text><Text style={{color: "white"}}>{text}</Text></View>
+                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Highest trading volume</Text><Text style={{color: "white"}}>{text2}</Text></View>
+                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Maximize profits</Text><Text style={{color: "white"}}>{text3}</Text></View>
             </ScrollView>
 
             <View style={style.bullets}>
