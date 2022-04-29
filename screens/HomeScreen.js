@@ -11,7 +11,7 @@ import CryptoPicker from '../components/CryptoPicker';
 import Carousel from '../components/Carousel';
 
 export default function HomeScreen({ route }) {
-  
+
   const [currency, setCurrency] = useState("eur");
   const [crypto, setCrypto] = useState("bitcoin");
   const [parentData, setParentData] = useState([]);
@@ -49,10 +49,10 @@ export default function HomeScreen({ route }) {
   }
 
   useEffect(() => {
-    if(route?.params?.crypto.id!=undefined){
-    setCrypto(route?.params?.crypto.id);
+    if (route?.params?.crypto.id != undefined) {
+      setCrypto(route?.params?.crypto.id);
     }
-  },[route?.params?.crypto])
+  }, [route?.params?.crypto])
 
   const [showChart, setShowChart] = useState(false);
   const API = "https://api.coingecko.com/api/v3/coins/" + crypto + "/market_chart/range?vs_currency=" + currency + "&from="
@@ -62,12 +62,16 @@ export default function HomeScreen({ route }) {
     <View style={style.containerBackground}>
       <ScrollView>
         <Header />
-        <CurrencyPicker getCurrency={getCurrency} />
-        <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
-        <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} setDate={setDate} setDate2={setDate2} date={date} date2={date2}/>
-        
+        <View style={style.slotContainer}>
+          <CurrencyPicker getCurrency={getCurrency} />
+          <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
+
+        </View>
+
+        <DatePicker childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} API={API} setDate={setDate} setDate2={setDate2} date={date} date2={date2} />
+
         <Carousel parentData={parentData} currency={currency} API={API} date={date} date2={date2}
-        childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3}/>
+          childToParent={childToParent} childToParent2={childToParent2} childToParent3={childToParent3} />
         {showChart ? (
           <ChartComponent parentData={parentData} currency={currency} crypto={crypto} parentData2={parentData2} parentData3={parentData3} />
         ) : null}
@@ -82,7 +86,7 @@ export default function HomeScreen({ route }) {
             </Text>
           </TouchableOpacity>
         </View>
-        
+
         <Footer />
       </ScrollView>
     </View>

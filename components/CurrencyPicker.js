@@ -32,7 +32,7 @@ export default function CurrencyPicker({ getCurrency }) {
     }
   ]
   return (
-    <View style={style.slotContainer}>
+    <View>
       <Text style={style.text}>Select currency</Text>
       <Picker
         style={style.field}
