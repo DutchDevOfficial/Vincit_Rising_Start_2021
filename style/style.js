@@ -1,4 +1,3 @@
-import { faWheatAwnCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { StyleSheet } from "react-native";
 import { Dimensions, StatusBar } from "react-native";
 
@@ -136,7 +135,6 @@ export default StyleSheet.create({
   headerMarket: {
     backgroundColor: "#fc8717",
     flexDirection: "row",
-    alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 5,
     shadowOpacity: 0.5,
@@ -145,8 +143,6 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 6 },
     elevation: 5,
-    // background color must be set
-    //backgroundColor : "#0000", // invisible color,
     backgroundColor: "#4f4f4f",
   },
 
@@ -155,7 +151,7 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 2,
-    paddingVertical: 10,
+    paddingVertical: 5,
     paddingHorizontal: 5,
     shadowOpacity: 0.5,
     borderRadius: 5,
@@ -163,16 +159,36 @@ export default StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: { width: 2, height: 6 },
     elevation: 5,
-    // background color must be set
-    //backgroundColor : "#0000", // invisible color,
     backgroundColor: "#4f4f4f",
   },
   textMarket: {
     color: "#fff",
     fontSize: 15,
-    alignSelf: "center",
   },
-
+  marketColumn: {
+    width: config.deviceWidth * 0.2,
+    alignItems: "center",
+    textAlign: "center",
+  },
+  marketShortColumn: {
+    width: config.deviceWidth * 0.10,
+    alignItems: "center",
+    textAlign: "center"
+  },
+  marketLongColumn: {
+    width: config.deviceWidth * 0.25,
+    alignItems: "center",
+    textAlign: "center",
+  },
+  marketPrice: {
+    shadowOpacity: 0.5,
+    borderRadius: 5,
+    shadowRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 6 },
+    elevation: 5,
+    backgroundColor: "#4f4f4f",
+  },
 
   carouselItem: {
     width: "30%",

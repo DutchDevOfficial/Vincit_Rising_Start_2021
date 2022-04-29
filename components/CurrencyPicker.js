@@ -4,8 +4,33 @@ import { Picker } from '@react-native-picker/picker';
 import style from '../style/style';
 
 export default function CurrencyPicker({ getCurrency }) {
-  const [selectedCurrency, setSelectedCurrency] = useState("eur");
+  const [selectedCurrency, setSelectedCurrency] = useState({
+    "name": "EUR",
+    "symbol": "€",
+  });
 
+  const currencyList = [
+    {
+      "name": "EUR",
+      "symbol": "€"
+    },
+    {
+      "name": "USD",
+      "symbol": "$"
+    },
+    {
+      "name": "GBP",
+      "symbol": "£"
+    },
+    {
+      "name": "JPY",
+      "symbol": "¥"
+    },
+    {
+      "name": "AUD",
+      "symbol": "A$"
+    }
+  ]
   return (
     <View style={style.slotContainer}>
       <Text style={style.text}>Select currency</Text>
@@ -16,8 +41,9 @@ export default function CurrencyPicker({ getCurrency }) {
           getCurrency(itemValue);
           setSelectedCurrency(itemValue);
         }}>
-        <Picker.Item label="eur" value="eur" />
-        <Picker.Item label="usd" value="usd" />
+        {currencyList.map((currency) => (
+          <Picker.Item label={currency.name + "(" + currency.symbol + ")"} value={currency.name} key={currency} />
+        ))}
       </Picker>
     </View>
   )
