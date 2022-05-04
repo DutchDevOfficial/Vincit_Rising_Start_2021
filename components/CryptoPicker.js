@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Picker } from '@react-native-picker/picker';
 import style from '../style/style';
 
-export default function CryptoPicker({ getCrypto, listAPI }) {
+export default function CryptoPicker({ getCrypto, listAPI, crypto }) {
   const [selectedCrypto, setSelectedCrypto] = useState("bitcoin");
   const [cryptoList, setCryptoList] = useState([
     {
@@ -16,6 +16,10 @@ export default function CryptoPicker({ getCrypto, listAPI }) {
   useEffect(() => {
     FetchCryptos()
   }, [listAPI]);
+
+  useEffect(() => {
+    setSelectedCrypto(crypto)
+  }, [crypto]);
 
   function FetchCryptos() {
     fetch(listAPI)

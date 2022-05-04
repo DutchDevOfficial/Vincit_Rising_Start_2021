@@ -59,7 +59,7 @@ export default function Carousel({ crypto, parentData, currency, date, date2, AP
             .then(res => res.json())
             .then(
                 (result) => {
-                    console.log(result.prices.length)
+                    //console.log(result.prices.length)
                     if (result.prices.length == 0) {
                         alert("No data for given date range")
                         return

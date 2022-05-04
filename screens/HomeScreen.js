@@ -56,7 +56,7 @@ export default function HomeScreen({ route }) {
         <Header />
         <View style={style.slotContainer}>
           <CurrencyPicker getCurrency={getCurrency} />
-          <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} />
+          <CryptoPicker getCrypto={getCrypto} listAPI={listAPI} crypto={crypto} />
 
         </View>
 
