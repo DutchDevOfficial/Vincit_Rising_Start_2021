@@ -4,10 +4,9 @@ import { TabActions, useFocusEffect } from "@react-navigation/native";
 import style from '../style/style';
 
 export default function MarketScreen({ navigation }) {
-  const [currency, setCurrency] = useState({
-    "name": "EUR",
-    "symbol": "€",
-  });
+  const [currency, setCurrency] = useState(
+    { name: "EUR", symbol: "€" }
+  );
   const [cryptoList, setCryptoList] = useState([
     {
       "id": "bitcoin",
@@ -37,7 +36,7 @@ export default function MarketScreen({ navigation }) {
       "roi": null,
       "last_updated": "2022-04-19T22:39:02.744Z"
     }]);
-  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=ZAR&order=market_cap_desc&per_page=25"
+  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency.name + "&order=market_cap_desc&per_page=25"
 
   useFocusEffect(
     React.useCallback(() => {
@@ -62,11 +61,6 @@ export default function MarketScreen({ navigation }) {
   function handleOnPress(selection) {
     // OnPress sends the selected crypto here, and jumpTo switches focus to HomeScreen and sends the selected crypto
     const jumpToHome = TabActions.jumpTo('Home', { crypto: selection });
-    navigation.dispatch(jumpToHome);
-  }
-
-  function jumpToCurrency() {
-    const jumpToHome = TabActions.jumpTo('Home');
     navigation.dispatch(jumpToHome);
   }
 
@@ -103,11 +97,7 @@ export default function MarketScreen({ navigation }) {
         <Text style={[style.textMarket, style.marketShortColumn]}>#</Text>
         <Text style={[style.textMarket, style.marketColumn]}>Crypto</Text>
         <Text style={[style.textMarket, style.marketColumn]}></Text>
-        <TouchableOpacity style={style.marketPrice} onPress={() => {
-          jumpToCurrency();
-        }}>
-          <Text style={[style.textMarket, style.marketLongColumn]}>Price({currency.symbol})</Text>
-        </TouchableOpacity>
+        <Text style={[style.textMarket, style.marketLongColumn]}>Price({currency.symbol})</Text>
         <Text style={[style.textMarket, style.marketColumn]}>24h:</Text>
       </View>
     );

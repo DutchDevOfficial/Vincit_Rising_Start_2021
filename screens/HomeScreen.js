@@ -11,12 +11,13 @@ import Carousel from '../components/Carousel';
 
 export default function HomeScreen({ route }) {
 
-  const [currency, setCurrency] = useState("eur");
+  const [currency, setCurrency] = useState(
+    { name: "EUR", symbol: "€" }
+  );
   const [crypto, setCrypto] = useState("bitcoin");
   const [parentData, setParentData] = useState([]);
   const [parentData2, setParentData2] = useState('');
   const [parentData3, setParentData3] = useState([]);
-  //const [isDisabled, SetIsDisabled] = useState(true);
   const [buttonText, setButtonText] = useState("Show price chart");
 
 
@@ -24,13 +25,6 @@ export default function HomeScreen({ route }) {
   const [date2, setDate2] = useState(new Date());
 
   const childToParent = (childData) => {
-    // if (childData.length > 4 ) {
-    //  SetIsDisabled(false)
-    // } else {
-    //   SetIsDisabled(true)
-    //   setShowChart(false);
-    // }
-
     setParentData(childData);
   }
   const childToParent2 = (childData2) => {
@@ -42,7 +36,6 @@ export default function HomeScreen({ route }) {
   const getCurrency = (childData) => {
     setCurrency(childData);
   }
-
   const getCrypto = (childData) => {
     setCrypto(childData);
   }
@@ -54,8 +47,8 @@ export default function HomeScreen({ route }) {
   }, [route?.params?.crypto])
 
   const [showChart, setShowChart] = useState(false);
-  const API = "https://api.coingecko.com/api/v3/coins/" + crypto + "/market_chart/range?vs_currency=" + currency + "&from="
-  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency + "&order=market_cap_desc&per_page=10"
+  const API = "https://api.coingecko.com/api/v3/coins/" + crypto + "/market_chart/range?vs_currency=" + currency.name + "&from="
+  const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency.name + "&order=market_cap_desc&per_page=25"
 
   return (
     <View style={style.containerBackground}>
@@ -85,7 +78,6 @@ export default function HomeScreen({ route }) {
             </Text>
           </TouchableOpacity>
         </View>
-
         <Footer />
       </ScrollView>
     </View>

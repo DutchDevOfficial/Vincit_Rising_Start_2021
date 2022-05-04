@@ -162,7 +162,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     maxProfit = Math.max(maxProfit, prices[i][1] - min);
                     maxIndex = i;
                 }
-                setText3('For maximum profit of ' + maxProfit.toFixed(2) + ' ' + currency + ' buy at ' + new Date(prices[minIndex][0]).toUTCString().slice(0, -12) + 'and sell at ' + new Date(prices[maxIndex][0]).toUTCString().slice(0, -12) + '.')
+                setText3('For maximum profit of ' + currency.symbol + maxProfit.toFixed(2)  + ' buy at ' + new Date(prices[minIndex][0]).toUTCString().slice(0, -12) + 'and sell at ' + new Date(prices[maxIndex][0]).toUTCString().slice(0, -12) + '.')
             }
         }
     }

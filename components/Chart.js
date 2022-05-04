@@ -41,17 +41,8 @@ export default function Chart({ parentData, currency, crypto, parentData2, paren
   }
 
   const [_decimal, set_decimal] = useState(0)
-  const [_currency, set_currency] = useState("€")
+
   useEffect(() => {
-    switch (currency) {
-      case "eur":
-        set_currency("€")
-        break;
-      case "usd":
-        set_currency("$")
-      default:
-        break;
-    }
     try {
       if (parentData[0][1] > 100) {
         set_decimal(0)
@@ -75,7 +66,7 @@ export default function Chart({ parentData, currency, crypto, parentData2, paren
         }}
         width={Dimensions.get("window").width * 0.9} // from react-native
         height={220}
-        yAxisLabel={_currency}
+        yAxisLabel={currency.symbol}
         yAxisSuffix=""
         yAxisInterval={1} // optional, defaults to 1
         chartConfig={{

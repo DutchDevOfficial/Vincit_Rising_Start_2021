@@ -4,33 +4,15 @@ import { Picker } from '@react-native-picker/picker';
 import style from '../style/style';
 
 export default function CurrencyPicker({ getCurrency }) {
-  const [selectedCurrency, setSelectedCurrency] = useState({
-    "name": "EUR",
-    "symbol": "€",
-  });
+  const [selectedCurrency, setSelectedCurrency] = useState(0);
 
   const currencyList = [
-    {
-      "name": "EUR",
-      "symbol": "€"
-    },
-    {
-      "name": "USD",
-      "symbol": "$"
-    },
-    {
-      "name": "GBP",
-      "symbol": "£"
-    },
-    {
-      "name": "JPY",
-      "symbol": "¥"
-    },
-    {
-      "name": "AUD",
-      "symbol": "A$"
-    }
+    { name: "EUR", symbol: "€" },
+    { name: "USD", symbol: "$" },
+    { name: "GBP", symbol: "£" },
+    { name: "AUD", symbol: "A$" }
   ]
+
   return (
     <View>
       <Text style={style.text}>Select currency</Text>
@@ -38,11 +20,11 @@ export default function CurrencyPicker({ getCurrency }) {
         style={style.field}
         selectedValue={selectedCurrency}
         onValueChange={(itemValue) => {
-          getCurrency(itemValue);
+          getCurrency(currencyList[itemValue]);
           setSelectedCurrency(itemValue);
         }}>
-        {currencyList.map((currency) => (
-          <Picker.Item label={currency.name + "(" + currency.symbol + ")"} value={currency.name} key={currency} />
+        {currencyList.map((currency, index) => (
+          <Picker.Item label={currency.name + "(" + currency.symbol + ")"} value={index} key={currency} />
         ))}
       </Picker>
     </View>
