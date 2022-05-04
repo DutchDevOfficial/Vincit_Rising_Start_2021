@@ -58,7 +58,7 @@ export default function Chart({ parentData, currency, crypto, parentData2, paren
 
   return (
     <View style={style.container}>
-      <Text style={style.text2}>{crypto} price chart</Text>
+      <Text style={style.text2}>{crypto.name} price chart</Text>
       <LineChart
         data={{
           labels: dates,

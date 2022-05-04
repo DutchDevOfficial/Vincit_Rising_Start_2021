@@ -14,12 +14,13 @@ export default function HomeScreen({ route }) {
   const [currency, setCurrency] = useState(
     { name: "EUR", symbol: "€" }
   );
-  const [crypto, setCrypto] = useState("bitcoin");
+  const [crypto, setCrypto] = useState(
+    { "id": "bitcoin", "name": "Bitcoin" }
+  );
   const [parentData, setParentData] = useState([]);
   const [parentData2, setParentData2] = useState('');
   const [parentData3, setParentData3] = useState([]);
   const [buttonText, setButtonText] = useState("Show price chart");
-
 
   const [date, setDate] = useState(new Date(new Date().setDate(new Date().getDate() - 1)));
   const [date2, setDate2] = useState(new Date());
@@ -41,13 +42,13 @@ export default function HomeScreen({ route }) {
   }
 
   useEffect(() => {
-    if (route?.params?.crypto.id != undefined) {
-      setCrypto(route?.params?.crypto.id);
+    if (route?.params?.crypto != undefined) {
+      setCrypto(route?.params?.crypto);
     }
   }, [route?.params?.crypto])
 
   const [showChart, setShowChart] = useState(false);
-  const API = "https://api.coingecko.com/api/v3/coins/" + crypto + "/market_chart/range?vs_currency=" + currency.name + "&from="
+  const API = "https://api.coingecko.com/api/v3/coins/" + crypto.id + "/market_chart/range?vs_currency=" + currency.name + "&from="
   const listAPI = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=" + currency.name + "&order=market_cap_desc&per_page=25"
 
   return (

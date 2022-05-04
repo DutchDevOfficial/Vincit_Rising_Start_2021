@@ -4,21 +4,17 @@ import { Picker } from '@react-native-picker/picker';
 import style from '../style/style';
 
 export default function CryptoPicker({ getCrypto, listAPI, crypto }) {
-  const [selectedCrypto, setSelectedCrypto] = useState("bitcoin");
+  const [selectedCrypto, setSelectedCrypto] = useState(0);
   const [cryptoList, setCryptoList] = useState([
-    {
-      "id": "bitcoin",
-      "symbol": "btc",
-      "name": "Bitcoin",
-      "image": "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
-    }]);
+    { "id": "bitcoin", "name": "Bitcoin" }
+  ]);
 
   useEffect(() => {
     FetchCryptos()
   }, [listAPI]);
 
   useEffect(() => {
-    setSelectedCrypto(crypto)
+    setSelectedCrypto(crypto.market_cap_rank - 1)
   }, [crypto]);
 
   function FetchCryptos() {
@@ -42,11 +38,11 @@ export default function CryptoPicker({ getCrypto, listAPI, crypto }) {
         style={style.field}
         selectedValue={selectedCrypto}
         onValueChange={(itemValue) => {
-          getCrypto(itemValue);
+          getCrypto(cryptoList[itemValue]);
           setSelectedCrypto(itemValue);
         }}>
-        {cryptoList.map((crypto) => (
-          <Picker.Item label={crypto.name} value={crypto.id} key={crypto} />
+        {cryptoList.map((crypto, index) => (
+          <Picker.Item label={crypto.name} value={index} key={crypto} />
         ))}
       </Picker>
     </View>
