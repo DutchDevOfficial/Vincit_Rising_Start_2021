@@ -2,11 +2,18 @@ import { View, Text, ScrollView } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import style from '../style/style';
 
-export default function Carousel({ parentData, currency, date, date2, API, childToParent, childToParent2, childToParent3 }) {
+export default function Carousel({ crypto, parentData, currency, date, date2, API, childToParent, childToParent2, childToParent3 }) {
     const [text, setText] = useState('Loading...');
     const [text2, setText2] = useState('Loading...');
     const [text3, setText3] = useState("Loading...");
     const [datetoday, setDatetoday] = useState(new Date());
+
+
+    useEffect(() => {
+        setText("Loading...")
+        setText2("Loading...")
+        setText3("Loading...")
+    }, [date, date2, currency, crypto])
 
 
     useEffect(() => {
@@ -52,6 +59,11 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result.prices.length)
+                    if (result.prices.length == 0) {
+                        alert("No data for given date range")
+                        return
+                    }
                     let _prices = new Array
                     let _prices2 = new Array
                     let _prices3 = new Array
@@ -80,8 +92,8 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     GetHighestVolume(_totalVolume, dayRange)
                     GetDownwardTrend(_prices, dayRange)
                     Calculate(dayRange)
-                    
-                   
+
+
                 },
                 (error) => {
                     alert("Error!")
@@ -89,7 +101,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
             )
     }
     function GetHighestVolume(_totalVolume, dayRange) {
-        if (dayRange === 1){
+        if (dayRange === 1) {
             setText2("There must be more than 1 day between given dates for the calculations to work properly")
             return
         }
@@ -97,10 +109,15 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         let maxIndex = 0;
 
         for (let i = 0; i < _totalVolume.length; i++) {
-            if (_totalVolume[i][1] > max) {
-                max = _totalVolume[i][1];
-                maxIndex = i;
+            try {
+                if (_totalVolume[i][1] > max) {
+                    max = _totalVolume[i][1];
+                    maxIndex = i;
+                }
+            } catch (error) {
+                console.log(error)
             }
+
         }
         let HighestVolumeDay = new Date(_totalVolume[maxIndex][0]).toUTCString().slice(0, -12)
         setText2("The highest trading volume was " + _totalVolume[maxIndex][1] + " on " + HighestVolumeDay)
@@ -108,8 +125,8 @@ export default function Carousel({ parentData, currency, date, date2, API, child
 
 
 
-    function GetDownwardTrend(_prices,dayRange) {
-        if (dayRange === 1){
+    function GetDownwardTrend(_prices, dayRange) {
+        if (dayRange === 1) {
             setText("There must be more than 1 day between given dates for the calculations to work properly")
             return
         }
@@ -142,7 +159,7 @@ export default function Carousel({ parentData, currency, date, date2, API, child
         if (parentData.length === 0 || parentData === "undefined") {
             return null;
         } else {
-            if (dayRange === 1){
+            if (dayRange === 1) {
                 setText3("There must be more than 1 day between given dates for the calculations to work properly")
                 return
             }
@@ -217,9 +234,9 @@ export default function Carousel({ parentData, currency, date, date2, API, child
                     setInterval(getInterval(data.nativeEvent.contentOffset.x));
                 }}
                 contentContainerStyle={{ width: `${300}%` }}>
-                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Downward Trend</Text><Text style={{color: "white"}}>{text}</Text></View>
-                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Highest trading volume</Text><Text style={{color: "white"}}>{text2}</Text></View>
-                <View style={style.carouselItem} ><Text style={{textAlign: "center", color: "white",}}>Maximize profits</Text><Text style={{color: "white"}}>{text3}</Text></View>
+                <View style={style.carouselItem} ><Text style={{ textAlign: "center", color: "white", }}>Downward Trend</Text><Text style={{ color: "white" }}>{text}</Text></View>
+                <View style={style.carouselItem} ><Text style={{ textAlign: "center", color: "white", }}>Highest trading volume</Text><Text style={{ color: "white" }}>{text2}</Text></View>
+                <View style={style.carouselItem} ><Text style={{ textAlign: "center", color: "white", }}>Maximize profits</Text><Text style={{ color: "white" }}>{text3}</Text></View>
             </ScrollView>
 
             <View style={style.bullets}>

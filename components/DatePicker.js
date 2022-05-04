@@ -51,7 +51,7 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
         <Pressable
           onPress={toggle}>
           <Text style={style.datePicker}>
-            {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
+            {date.getDate()}.{date.getMonth() + 1}.{date.getFullYear()} <FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
           </Text>
         </Pressable>
         {show && Platform.OS === 'ios' && (
@@ -75,11 +75,11 @@ export default function DatePicker({ childToParent, childToParent2,childToParent
         )}
       </View>
       <View>
-        <Text style={style.text}>End date</Text>
+        <Text style={style.dateText}>End date</Text>
         <Pressable
           onPress={toggle2}>
           <Text style={style.datePicker}>
-            {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()}<FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
+            {date2.getDate()}.{date2.getMonth() + 1}.{date2.getFullYear()} <FontAwesomeIcon style={{color: 'black',}} icon={ faCalendarDay } />
           </Text>
         </Pressable>
         {show2 && Platform.OS === 'ios' && (
